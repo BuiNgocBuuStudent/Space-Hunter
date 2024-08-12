@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+
+    [SerializeField] private Vector3[] spawnPoints;
     [SerializeField] private GameObject[] gamePrefabs;
     private float posX = 20.0f;
     private float posZ = -0.5f;
@@ -23,8 +25,8 @@ public class SpawnManager : MonoBehaviour
     private void SpawnEnemy()
     {
         int index = Random.Range(0, gamePrefabs.Length);
-        float randomPosY = Random.Range(-4.0f, 4.0f);
-        Vector3 randomSpawnPos = new Vector3(posX, randomPosY, posZ);
+        int randomSpawnPointIndex = Random.Range(0, spawnPoints.Length);
+        Vector3 randomSpawnPos = spawnPoints[randomSpawnPointIndex];
 
         Instantiate(gamePrefabs[index], randomSpawnPos, gamePrefabs[index].transform.rotation);
     }

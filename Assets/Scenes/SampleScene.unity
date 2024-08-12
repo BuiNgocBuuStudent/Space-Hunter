@@ -135,8 +135,8 @@ GameObject:
   - component: {fileID: 83296420}
   - component: {fileID: 83296419}
   - component: {fileID: 83296418}
-  - component: {fileID: 83296422}
   - component: {fileID: 83296423}
+  - component: {fileID: 83296424}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -230,19 +230,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &83296422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83296417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8d7801858b177499ccdac09be8f31b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 4
 --- !u!54 &83296423
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -270,6 +257,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &83296424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83296417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8d7801858b177499ccdac09be8f31b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 4
+  speed: 500
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +643,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b3620acb8dd7b5499934e018b7ab448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoints:
+  - {x: 20, y: 4, z: -0.5}
+  - {x: 20, y: 0, z: -0.5}
+  - {x: 20, y: -4, z: -0.5}
   gamePrefabs:
   - {fileID: 4564647263691044883, guid: 62115ed078d942c47ab8f30aa9d9f31e, type: 3}
   - {fileID: 6154550348750401381, guid: 446fe6cc850eab943b876ed2907618ee, type: 3}
