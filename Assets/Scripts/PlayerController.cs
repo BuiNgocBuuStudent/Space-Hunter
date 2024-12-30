@@ -1,15 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private GameManager gameManager;
+
+
     [SerializeField] private float distance;
-    [SerializeField] private float speed;
+    public int bullet;
+    // Start is called before the first frame update
+    void Start()
+    {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (!gameManager.isGameOver)
+        {
             if (Input.GetKeyDown(KeyCode.UpArrow) && transform.position.y < distance)
             {
                 MoveUp();
@@ -18,6 +27,7 @@ public class PlayerController : MonoBehaviour
             {
                 MoveDown();
             }
+        }
     }
     private void MoveUp()
     {
@@ -30,5 +40,15 @@ public class PlayerController : MonoBehaviour
         Vector3 downMoveDistance = new Vector3(transform.position.x, transform.position.y - distance, transform.position.z);
 
         transform.localPosition = downMoveDistance;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Game Over");
+            Destroy(other.gameObject);
+
+            gameManager.isGameOver = true;
+        }
     }
 }

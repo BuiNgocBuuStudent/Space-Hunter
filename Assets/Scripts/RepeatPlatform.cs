@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class RepeatPlatform : MonoBehaviour
 {
-    [SerializeField] private Vector3 startPos;
-    [SerializeField] private float repeatWidth;
+
+    private Vector3 startPos;
+    private float repeatWidth;
 
     // Start is called before the first frame update
     void Start()
     {
+
         startPos = transform.position;
         repeatWidth = GetComponent<BoxCollider>().size.x / 2;
     }
