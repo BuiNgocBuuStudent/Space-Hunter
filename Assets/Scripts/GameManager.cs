@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> enemyPrefabs;
     [SerializeField] private GameObject powerupPrefabs;
 
-    public float spawnRateEnemy = 1.5f;
+    public float spawnRateEnemy = 1.0f;
     public float spawnRatePowerup = 10.0f;
     public float startTimeSpawnPowerup = 10.0f;
 

@@ -9,7 +9,7 @@ public class Gun : MonoBehaviour
 
     public int maxAmmo;
     private int currentAmmo;
-    private float reloadTime = 1.0f;
+    private float reloadTime = 1.5f;
 
     private bool isReloading = false;
     // Start is called before the first frame update
