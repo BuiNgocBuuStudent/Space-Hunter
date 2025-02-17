@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     public Text bulletRemainingText;
 
     public Text scoreText;
@@ -12,21 +14,26 @@ public class GameManager : MonoBehaviour
 
     public Text coinText;
     private int coin;
+
     public bool isGameOver;
+    public bool isGamePause;
 
     public List<Vector3> spawnPoints;
 
     [SerializeField] private List<GameObject> enemyPrefabs;
-    [SerializeField] private GameObject powerupPrefabs;
+    [SerializeField] private GameObject powerupPrefab;
 
-    public float spawnRateEnemy = 1.0f;
+    public float spawnRateEnemy;
     public float spawnRatePowerup = 10.0f;
     public float startTimeSpawnPowerup = 10.0f;
 
-
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
-        isGameOver = false;
+        isGameOver = isGamePause = false;
 
     }
     // Update is called once per frame
@@ -45,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnZombie()
     {
-        while (!isGameOver)
+        while (!isGameOver && !isGamePause)
         {
             yield return new WaitForSeconds(spawnRateEnemy);
             int index = Random.Range(0, enemyPrefabs.Count);
@@ -56,9 +63,9 @@ public class GameManager : MonoBehaviour
 
     private void SpawnPowerup()
     {
-        if (!isGameOver)
+        if (!isGameOver && !isGamePause)
         {
-            Instantiate(powerupPrefabs);
+            Instantiate(powerupPrefab);
         }
 
     }

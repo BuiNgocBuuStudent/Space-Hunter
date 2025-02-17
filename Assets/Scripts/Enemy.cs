@@ -5,15 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private List<Vector3> spawnPoints;
-    private GameManager gameManager;
 
     public int health;
     public int income;
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        spawnPoints = gameManager.spawnPoints;
+        spawnPoints = GameManager.Instance.spawnPoints;
 
         transform.position = RanDomPos();
     }
@@ -29,23 +27,23 @@ public class Enemy : MonoBehaviour
     {
         
     }
-    public void IsAttacked()
+    public void IsAttacked(int damage)
     {
-        health--;
+        health -= damage;
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            IsAttacked();
+            IsAttacked(1);
             other.gameObject.SetActive(false);
             
         }
 
         if (health == 0)
         {
-            gameManager.UpdateScore();
-            gameManager.UpdateCoin(income);
+            GameManager.Instance.UpdateScore();
+            GameManager.Instance.UpdateCoin(income);
             Destroy(gameObject);
         }
     }

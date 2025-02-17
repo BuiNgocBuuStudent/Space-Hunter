@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private GameManager gameManager;
 
 
     [SerializeField] private float distance;
@@ -10,14 +9,13 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!gameManager.isGameOver)
+        if (!GameManager.Instance.isGameOver)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow) && transform.position.y < distance)
             {
@@ -48,7 +46,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Game Over");
             Destroy(other.gameObject);
 
-            gameManager.isGameOver = true;
+            GameManager.Instance.isGameOver = true;
         }
     }
 }

@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class DestroyOutOfBounds : MonoBehaviour
 {
-    private GameManager gameManager;
 
-    private float limitPosX = -25.0f;
+    private float limitPosX = -30.0f;
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -22,7 +20,7 @@ public class DestroyOutOfBounds : MonoBehaviour
             if (gameObject.CompareTag("Enemy"))
             {
                 Debug.Log("Game Over!!");
-                gameManager.isGameOver = true;
+                GameManager.Instance.isGameOver = true;
             }
         }
         else if(transform.position.x > -limitPosX)

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7853864772645187402}
   - component: {fileID: 8712787223842289066}
   - component: {fileID: 8918364765219033616}
-  - component: {fileID: 3632336088489194877}
   - component: {fileID: 4314707335030944975}
   m_Layer: 0
   m_Name: Boost
@@ -134,20 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6672fe01a5e565c418349b28a7a48efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  limitPosX: -22
---- !u!114 &3632336088489194877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9089233310225096202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63d6ad06454e7c74aad6abd6ec5cd0f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boosts: []
 --- !u!114 &4314707335030944975
 MonoBehaviour:
   m_ObjectHideFlags: 0

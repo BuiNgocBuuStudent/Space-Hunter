@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
-    private GameManager gameManager;
 
     [SerializeField] private List<Vector3> spawnPoints;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        spawnPoints = gameManager.spawnPoints;
+        spawnPoints = GameManager.Instance.spawnPoints;
 
         transform.position = RanDomPos();
     }
