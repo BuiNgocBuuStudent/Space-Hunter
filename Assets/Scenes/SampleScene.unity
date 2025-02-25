@@ -2051,6 +2051,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2066293344355761113, guid: b1915a8a3ce82024888dcde1a82cab12, type: 3}
   m_PrefabInstance: {fileID: 1950558176}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1645823017 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2191707162984279311, guid: b1915a8a3ce82024888dcde1a82cab12, type: 3}
+  m_PrefabInstance: {fileID: 1950558176}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9640b27b9075e8409a3bf874591c3b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1649583313
 GameObject:
   m_ObjectHideFlags: 0
@@ -2862,6 +2873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiBoostGameObject: {fileID: 1966780432}
+  gun: {fileID: 1645823017}
   boostList:
   - {fileID: -837589097559667618, guid: 1974f858a97765740892df3aea2a9576, type: 3}
   - {fileID: -837589097559667618, guid: d5a3518748a46e84a908e481b3e03333, type: 3}
@@ -2869,10 +2881,15 @@ MonoBehaviour:
   - {fileID: -837589097559667618, guid: ca072da045541954fba7d47dca433513, type: 3}
   - {fileID: -837589097559667618, guid: 92e703df097bfa649a64aa5d97c962fe, type: 3}
   - {fileID: -837589097559667618, guid: 19bc71fb1ad296e4798b25425bd563fd, type: 3}
+  boostSelectedList: []
   textList:
   - {fileID: 125658733}
   - {fileID: 1854378715}
   - {fileID: 1538014687}
+  selectBtn:
+  - {fileID: 269420118}
+  - {fileID: 1364776874}
+  - {fileID: 1942205602}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

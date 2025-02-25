@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Boost : MonoBehaviour
 {
-    public Text boostName;
+    public Text boostDescription;
     public float weight;
 
     // Start is called before the first frame update

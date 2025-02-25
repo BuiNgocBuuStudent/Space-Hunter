@@ -57,5 +57,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62af856934682064aa69c9712ca1dc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostName: {fileID: 396128151995809534, guid: ab59d55e1649631489ec79e2d5a5f190, type: 3}
+  boostDescription: {fileID: 396128151995809534, guid: ab59d55e1649631489ec79e2d5a5f190, type: 3}
   weight: 10
