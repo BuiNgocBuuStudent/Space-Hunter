@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,9 +24,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject powerupPrefab;
 
     public float spawnRateEnemy;
-    public float spawnRatePowerup = 10.0f;
-    public float startTimeSpawnPowerup = 10.0f;
-
+    public float spawnRatePowerup;
+    public float startTimeSpawnPowerup;
     private void Awake()
     {
         Instance = this;
@@ -34,7 +33,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         isGameOver = isGamePause = false;
-
+        spawnRateEnemy = 2;
+        spawnRatePowerup = 30;
+        startTimeSpawnPowerup = 10;
     }
     // Update is called once per frame
     void Update()
@@ -52,13 +53,20 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnZombie()
     {
-        while (!isGameOver && !isGamePause)
+        while (!isGameOver)
         {
+            while (isGamePause)
+            {
+                yield return null; // Dừng lại và chờ đến khi resume
+            }
+
             yield return new WaitForSeconds(spawnRateEnemy);
+
+            if (isGamePause) continue; // Kiểm tra lại nếu pause sau khi delay
+
             int index = Random.Range(0, enemyPrefabs.Count);
             Instantiate(enemyPrefabs[index]);
         }
-
     }
 
     private void SpawnPowerup()
