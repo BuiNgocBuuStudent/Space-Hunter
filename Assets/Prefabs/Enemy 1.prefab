@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6672fe01a5e565c418349b28a7a48efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  limitPosX: -22
 --- !u!114 &7353409964941739342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,5 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
-  health: 3
+  bullet: {fileID: -7199293693527480087, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
+  maxHealth: 3
+  currentHealth: 3
   income: 30

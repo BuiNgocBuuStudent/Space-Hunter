@@ -6,17 +6,20 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private List<Vector3> spawnPoints;
 
-    public int health;
+    public Bullet bullet;
+
+    public int maxHealth;
+    public int currentHealth;
     public int income;
     // Start is called before the first frame update
     void Start()
     {
+        currentHealth = maxHealth;
         spawnPoints = GameManager.Instance.spawnPoints;
-
-        transform.position = RanDomPos();
+        transform.position = RandomPos();
     }
 
-    private Vector3 RanDomPos()
+    private Vector3 RandomPos()
     {
         int index = Random.Range(0, spawnPoints.Count);
         return spawnPoints[index];
@@ -25,26 +28,24 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentHealth <= 0)
+        {
+            GameManager.Instance.UpdateScore();
+            GameManager.Instance.UpdateCoin(income);
+            Destroy(gameObject);
+        }
     }
     public void IsAttacked(int damage)
     {
-        health -= damage;
+        Debug.Log("attack");
+        currentHealth -= damage;
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            IsAttacked(1);
+            IsAttacked(bullet.damage);
             other.gameObject.SetActive(false);
-            
-        }
-
-        if (health == 0)
-        {
-            GameManager.Instance.UpdateScore();
-            GameManager.Instance.UpdateCoin(income);
-            Destroy(gameObject);
         }
     }
 }

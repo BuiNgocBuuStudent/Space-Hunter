@@ -225,7 +225,7 @@ Transform:
   m_GameObject: {fileID: 83296417}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21, y: 0, z: 0}
+  m_LocalPosition: {x: -14.57, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -795,7 +795,7 @@ MonoBehaviour:
   - {fileID: 6467796485199524224, guid: 34b2820f617abbe44aa2c1a6495359e1, type: 3}
   powerupPrefab: {fileID: 9089233310225096202, guid: 39539a0f3e1a41f4b8c4f3daac0033bb, type: 3}
   spawnRateEnemy: 2
-  spawnRatePowerup: 10
+  spawnRatePowerup: 30
   startTimeSpawnPowerup: 10
 --- !u!4 &289224499
 Transform:
@@ -2458,8 +2458,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 83296421}
     m_Modifications:
     - target: {fileID: -2191707162984279311, guid: b1915a8a3ce82024888dcde1a82cab12, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 7353409964941739342, guid: 62115ed078d942c47ab8f30aa9d9f31e, type: 3}
+    - target: {fileID: -2191707162984279311, guid: b1915a8a3ce82024888dcde1a82cab12, type: 3}
       propertyPath: maxAmmo
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2191707162984279311, guid: b1915a8a3ce82024888dcde1a82cab12, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2191707162984279311, guid: b1915a8a3ce82024888dcde1a82cab12, type: 3}
       propertyPath: reloadTime
@@ -2873,6 +2881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiBoostGameObject: {fileID: 1966780432}
+  bullet: {fileID: -7199293693527480087, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
   gun: {fileID: 1645823017}
   boostList:
   - {fileID: -837589097559667618, guid: 1974f858a97765740892df3aea2a9576, type: 3}

@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class BoostManager : MonoBehaviour
 {
     public GameObject uiBoostGameObject;
+    public Bullet bullet;
     public Gun gun;
+
 
     [SerializeField]
     private List<Boost> boostList;
@@ -20,6 +22,9 @@ public class BoostManager : MonoBehaviour
     public List<Button> selectBtn;
     private float totalWeight;
     private float cloneOfTotalWeight;
+
+    private float countdownTime;
+    private bool isBoosting;
 
     private void Awake()
     {
@@ -40,6 +45,7 @@ public class BoostManager : MonoBehaviour
     // Update is called per frame
     public void showBoostPopup()
     {
+        boostSelectedList.Clear();//xóa tất cả các boost trong lần hiển thị trước đó
         setupLogical();
         uiBoostGameObject.SetActive(true);
         GameManager.Instance.isGamePause = true;
@@ -64,7 +70,7 @@ public class BoostManager : MonoBehaviour
         Boost currentBoost = null;
 
         if (cloneBoostsList.Count == 0)
-            return cloneBoostsList[0]; // trả về phần tử đầu tiên để tránh trả về null
+            return cloneBoostsList[0];
 
         float randomNumber = Random.Range(0, cloneOfTotalWeight);
 
@@ -99,6 +105,8 @@ public class BoostManager : MonoBehaviour
                 break;
             case "Boost 3":
                 Debug.Log("Boost 3 is selected");
+                countdownTime = 5;
+                StartCoroutine(boostDamage());
                 break;
             case "Boost 4":
                 Debug.Log("Boost 4 is selected");
@@ -110,10 +118,27 @@ public class BoostManager : MonoBehaviour
                 break;
             default:
                 Debug.Log("Boost 6 is selected");
+                countdownTime = 10;
+                StartCoroutine(boostDamage());
                 break;
         }
         uiBoostGameObject.SetActive(false);
         GameManager.Instance.isGamePause = false;
+    }
+    IEnumerator boostDamage()
+    {
+        isBoosting = true;
+        Debug.Log("Boosting");
+
+        bullet.damage = 2;
+        Debug.Log("Current damage: " + bullet.damage);
+        yield return new WaitForSeconds(countdownTime);
+
+        bullet.damage = 1;
+        Debug.Log("Current damage: " + bullet.damage);
+
+        isBoosting = false;
+        Debug.Log("Boosting finish");
     }
 }
 
