@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour
 
     public Bullet bullet;
 
-    public int maxHealth;
-    public int currentHealth;
+    public float maxHealth;
+    public float currentHealth;
     public int income;
     // Start is called before the first frame update
     void Start()
@@ -18,6 +18,15 @@ public class Enemy : MonoBehaviour
         spawnPoints = GameManager.Instance.spawnPoints;
         transform.position = RandomPos();
     }
+    private void OnEnable()
+    {
+        EnemyController.OnHeal += IncreaseHealth;
+    }
+    private void OnDisable()
+    {
+        EnemyController.OnHeal -= IncreaseHealth;
+    }
+
 
     private Vector3 RandomPos()
     {
@@ -37,8 +46,12 @@ public class Enemy : MonoBehaviour
     }
     public void IsAttacked(int damage)
     {
-        Debug.Log("attack");
         currentHealth -= damage;
+    }
+    private void IncreaseHealth(float amount)
+    {
+        maxHealth += amount;
+        Debug.Log("Max health increased to: " + maxHealth);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -48,4 +61,5 @@ public class Enemy : MonoBehaviour
             other.gameObject.SetActive(false);
         }
     }
+
 }
