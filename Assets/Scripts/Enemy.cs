@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,6 +12,17 @@ public class Enemy : MonoBehaviour
     public float maxHealth;
     public float currentHealth;
     public int income;
+    private void Awake()
+    {
+        if(EnemyController.Instance != null)
+        {
+            maxHealth += EnemyController.Instance.GetGlobalHealBonus();
+        }
+        else
+        {
+            Debug.Log("EnemyController is null");
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +38,6 @@ public class Enemy : MonoBehaviour
     {
         EnemyController.OnHeal -= IncreaseHealth;
     }
-
 
     private Vector3 RandomPos()
     {
