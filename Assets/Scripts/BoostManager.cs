@@ -24,7 +24,6 @@ public class BoostManager : MonoBehaviour
     private float cloneOfTotalWeight;
 
     private float countdownTime;
-    private bool isBoosting;
 
     private void Awake()
     {
@@ -101,7 +100,7 @@ public class BoostManager : MonoBehaviour
                 break;
             case "Boost 2":
                 Debug.Log("Boost 2 is selected");
-                gun.reloadTime -= gun.reloadTime * 0.2f;
+                gun.reloadTime -= gun.reloadTime * 0.1f;
                 break;
             case "Boost 3":
                 Debug.Log("Boost 3 is selected");
@@ -114,7 +113,7 @@ public class BoostManager : MonoBehaviour
                 break;
             case "Boost 5":
                 Debug.Log("Boost 5 is selected");
-                gun.reloadTime -= gun.reloadTime * 0.4f;
+                gun.reloadTime -= gun.reloadTime * 0.2f;
                 break;
             default:
                 Debug.Log("Boost 6 is selected");
@@ -127,7 +126,6 @@ public class BoostManager : MonoBehaviour
     }
     IEnumerator boostDamage()
     {
-        isBoosting = true;
         Debug.Log("Boosting");
 
         bullet.damage = 2;
@@ -137,7 +135,6 @@ public class BoostManager : MonoBehaviour
         bullet.damage = 1;
         Debug.Log("Current damage: " + bullet.damage);
 
-        isBoosting = false;
         Debug.Log("Boosting finish");
     }
 }

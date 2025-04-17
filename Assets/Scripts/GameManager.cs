@@ -26,16 +26,17 @@ public class GameManager : MonoBehaviour
     public float spawnRateEnemy;
     public float spawnRatePowerup;
     public float startTimeSpawnPowerup;
+
     private void Awake()
     {
         Instance = this;
     }
     private void Start()
     {
-        isGameOver = isGamePause = false;
-        spawnRateEnemy = 2;
-        spawnRatePowerup = 30;
-        startTimeSpawnPowerup = 10;
+        spawnRateEnemy = 1.5f;
+        spawnRatePowerup = 30.0f;
+        startTimeSpawnPowerup = 10.0f;
+        StartGame();
     }
     // Update is called once per frame
     void Update()
@@ -45,13 +46,12 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("Start Game");
-        StartCoroutine(SpawnZombie());
-        InvokeRepeating("SpawnPowerup", startTimeSpawnPowerup, spawnRatePowerup);
-
+        StartCoroutine(SpawnEnemies());
+        InvokeRepeating("SpawnPowerups", startTimeSpawnPowerup, spawnRatePowerup);
     }
 
 
-    IEnumerator SpawnZombie()
+    IEnumerator SpawnEnemies()
     {
         while (!isGameOver)
         {
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void SpawnPowerup()
+    private void SpawnPowerups()
     {
         if (!isGameOver && !isGamePause)
         {
@@ -92,4 +92,5 @@ public class GameManager : MonoBehaviour
         coin += coinToAdd;
         coinText.text = "Coin: " + coin;
     }
+
 }

@@ -148,5 +148,5 @@ MonoBehaviour:
   spawnPoints: []
   bullet: {fileID: -7199293693527480087, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
   maxHealth: 3
-  currentHealth: 3
+  currentHealth: 0
   income: 30

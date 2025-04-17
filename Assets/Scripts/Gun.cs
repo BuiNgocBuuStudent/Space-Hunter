@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    private ObjectPooler ObjPooler;
-
     public int maxAmmo;
     private int currentAmmo;
     public float reloadTime;
@@ -14,11 +12,10 @@ public class Gun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.StartGame();
-        ObjPooler = FindObjectOfType<ObjectPooler>();
-        maxAmmo = ObjPooler.amountToPool;
+        maxAmmo = ObjectPooler.SharedInstance.amountToPool;
         currentAmmo = maxAmmo;
         GameManager.Instance.UpdateBulletRemaining(currentAmmo);
+        reloadTime = 1.0f;
     }
 
     // Update is called once per frame
@@ -46,7 +43,7 @@ public class Gun : MonoBehaviour
     IEnumerator ReLoad()
     {
         isReloading = true;
-        Debug.Log("Reloading...");
+        //Debug.Log("Reloading...");
 
         while (currentAmmo < maxAmmo)
         {
@@ -62,7 +59,7 @@ public class Gun : MonoBehaviour
         }
 
         isReloading = false;
-        Debug.Log("Reloading finished.");
+        //Debug.Log("Reloading finished.");
     }
 
     private void Shoot()

@@ -5,7 +5,6 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField] private float distance;
-    public int bullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +14,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.isGameOver)
+        if (!GameManager.Instance.isGameOver && !GameManager.Instance.isGamePause)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow) && transform.position.y < distance)
             {
@@ -39,14 +38,5 @@ public class PlayerController : MonoBehaviour
 
         transform.localPosition = downMoveDistance;
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("Game Over");
-            Destroy(other.gameObject);
 
-            GameManager.Instance.isGameOver = true;
-        }
-    }
 }

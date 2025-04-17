@@ -79,7 +79,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Th\u1EDDi gian n\u1EA1p \u0111\u1EA1n gi\u1EA3m 40%"
+  m_Text: "Th\u1EDDi gian n\u1EA1p \u0111\u1EA1n gi\u1EA3m 20%"
 --- !u!114 &-3898356249984817491
 MonoBehaviour:
   m_ObjectHideFlags: 0

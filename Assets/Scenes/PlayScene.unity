@@ -272,7 +272,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 4
-  bullet: 0
 --- !u!114 &83296425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,6 +760,7 @@ GameObject:
   - component: {fileID: 289224499}
   - component: {fileID: 289224498}
   - component: {fileID: 289224500}
+  - component: {fileID: 289224501}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -786,9 +786,9 @@ MonoBehaviour:
   isGameOver: 0
   isGamePause: 0
   spawnPoints:
-  - {x: 26, y: -4, z: 0}
-  - {x: 26, y: 0, z: 0}
-  - {x: 26, y: 4, z: 0}
+  - {x: 22, y: -4, z: 0}
+  - {x: 22, y: 0, z: 0}
+  - {x: 22, y: 4, z: 0}
   enemyPrefabs:
   - {fileID: 4564647263691044883, guid: 62115ed078d942c47ab8f30aa9d9f31e, type: 3}
   - {fileID: 6154550348750401381, guid: 446fe6cc850eab943b876ed2907618ee, type: 3}
@@ -827,6 +827,21 @@ MonoBehaviour:
   objectToPool: {fileID: 6472950778470344877, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
   amountToPool: 5
   pooledObjects: []
+--- !u!114 &289224501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289224497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a61e08c0ee5303448651dcbe197c970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healInterval: 0
+  healAmount: 0
+  globalHealBonus: 0
 --- !u!1 &523773766
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,8 +2183,8 @@ Transform:
   m_GameObject: {fileID: 1649583313}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.84, y: 1.2992, z: 0}
-  m_LocalScale: {x: 6, y: 3.550103, z: 1}
+  m_LocalPosition: {x: 8.1, y: 1.2967, z: 0}
+  m_LocalScale: {x: 6.0498896, y: 2.9412355, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2471,11 +2486,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2191707162984279311, guid: b1915a8a3ce82024888dcde1a82cab12, type: 3}
       propertyPath: reloadTime
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 567654295074216556, guid: b1915a8a3ce82024888dcde1a82cab12, type: 3}
       propertyPath: m_Name
       value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 683485538877875728, guid: b1915a8a3ce82024888dcde1a82cab12, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2066293344355761113, guid: b1915a8a3ce82024888dcde1a82cab12, type: 3}
       propertyPath: m_LocalPosition.x
