@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
@@ -15,7 +16,15 @@ public class ObjectPooler : MonoBehaviour
 
     private void Awake()
     {
-        SharedInstance = this;
+        if (SharedInstance == null)
+        {
+            SharedInstance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()

@@ -29,11 +29,19 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     private void Start()
     {
-        spawnRateEnemy = 1.5f;
+        spawnRateEnemy = 1.8f;
         spawnRatePowerup = 30.0f;
         startTimeSpawnPowerup = 10.0f;
         StartGame();

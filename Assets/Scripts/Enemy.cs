@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private List<Vector3> spawnPoints;
 
     public Bullet bullet;
-
+    public Move move;
     public float maxHealth;
     public float currentHealth;
     public int income;
@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
         if(EnemyController.Instance != null)
         {
             maxHealth += EnemyController.Instance.GetGlobalHealBonus();
+            move = GetComponent<Move>();
+            move.speed += EnemyController.Instance.GetGlobalSpeedBonus();
         }
         else
         {
@@ -59,9 +61,10 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= damage;
     }
-    private void IncreaseHealth(float amount)
+    private void IncreaseHealth(float healAmount, float speedAmount)
     {
-        maxHealth += amount;
+        maxHealth += healAmount;
+        move.speed += speedAmount;
         Debug.Log("Max health increased to: " + maxHealth);
     }
     private void OnTriggerEnter(Collider other)
