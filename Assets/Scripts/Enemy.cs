@@ -14,16 +14,9 @@ public class Enemy : MonoBehaviour
     public int income;
     private void Awake()
     {
-        if(EnemyController.Instance != null)
-        {
-            maxHealth += EnemyController.Instance.GetGlobalHealBonus();
-            move = GetComponent<Move>();
-            move.speed += EnemyController.Instance.GetGlobalSpeedBonus();
-        }
-        else
-        {
-            Debug.Log("EnemyController is null");
-        }
+        move = GetComponent<Move>();
+        move.speed += EnemyController.Instance.GetGlobalSpeedBonus();
+        maxHealth += EnemyController.Instance.GetGlobalHealBonus();
     }
     // Start is called before the first frame update
     void Start()
@@ -34,11 +27,18 @@ public class Enemy : MonoBehaviour
     }
     private void OnEnable()
     {
-        EnemyController.OnHeal += IncreaseHealth;
+        EnemyController.OnHeal += IncHealthAndSpeed;
     }
     private void OnDisable()
     {
-        EnemyController.OnHeal -= IncreaseHealth;
+        EnemyController.OnHeal -= IncHealthAndSpeed;
+    }
+
+    private void IncHealthAndSpeed(float healAmount, float speedAmount)
+    {
+        maxHealth += healAmount;
+        move.speed += speedAmount;
+        Debug.Log("Max health increased to: " + maxHealth + "and speed: " + move.speed);
     }
 
     private Vector3 RandomPos()
@@ -61,12 +61,7 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= damage;
     }
-    private void IncreaseHealth(float healAmount, float speedAmount)
-    {
-        maxHealth += healAmount;
-        move.speed += speedAmount;
-        Debug.Log("Max health increased to: " + maxHealth);
-    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))

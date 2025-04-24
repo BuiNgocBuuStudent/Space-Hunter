@@ -839,9 +839,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a61e08c0ee5303448651dcbe197c970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healInterval: 0
+  timeInterval: 0
   healAmount: 0
   globalHealBonus: 0
+  speedAmount: 0
+  globalSpeedBonus: 0
 --- !u!1 &523773766
 GameObject:
   m_ObjectHideFlags: 0

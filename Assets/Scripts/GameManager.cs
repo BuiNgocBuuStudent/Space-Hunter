@@ -41,9 +41,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        spawnRateEnemy = 1.8f;
-        spawnRatePowerup = 30.0f;
-        startTimeSpawnPowerup = 10.0f;
+        
         StartGame();
     }
     // Update is called once per frame

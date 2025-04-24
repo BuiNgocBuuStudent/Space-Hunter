@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+
     public static EnemyController Instance;
-    public static event System.Action<float, float> OnHeal;
-    [SerializeField] private float healInterval;
-    [SerializeField] private float healAmount;
-    [SerializeField] private float globalHealBonus;
-    [SerializeField] private float speedAmout;
-    [SerializeField] private float globalSpeedBonus;
+    public static event Action<float, float> OnHeal;
+    public float timeInterval;
+    public float healAmount;
+    public float globalHealBonus;
+    public float speedAmount;
+    public float globalSpeedBonus;
 
     private void Awake()
     {
@@ -25,36 +26,28 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start()
+    private void Start()
     {
-        healInterval = 90.0f;
-        healAmount = speedAmout = 1.0f;
         ResetGlobalHealBonus();
         ResetGlobalSpeedBonus();
-        StartCoroutine(IncreaseHeal());
-    }
+        StartCoroutine(IncreaseHealthAndSpeed());
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
-    IEnumerator IncreaseHeal()
+    IEnumerator IncreaseHealthAndSpeed()
     {
-
         while (!GameManager.Instance.isGameOver)
         {
             while (GameManager.Instance.isGamePause)
             {
-                yield return null; 
+                yield return null;
             }
 
             float elapsedTime = 0f;
-            while (elapsedTime < healInterval)
+            while (elapsedTime < timeInterval)
             {
                 if (GameManager.Instance.isGamePause || GameManager.Instance.isGameOver)
                 {
-                    yield return null; 
+                    yield return null;
                 }
                 else
                 {
@@ -62,16 +55,15 @@ public class EnemyController : MonoBehaviour
                 }
                 yield return null;
             }
-
             if (!GameManager.Instance.isGameOver)
             {
                 globalHealBonus += healAmount;
-                globalSpeedBonus += speedAmout;
-                OnHeal?.Invoke(healAmount, speedAmout);
-                Debug.Log("Notified all enemies to heal and speed with amount: " + healAmount);
+                globalSpeedBonus += speedAmount;
+                OnHeal?.Invoke(healAmount, speedAmount);
+                Debug.Log("Notified all health and speed of enemies increase: " + healAmount);
             }
-        }
 
+        }
     }
     public float GetGlobalHealBonus()
     {
@@ -81,14 +73,12 @@ public class EnemyController : MonoBehaviour
     {
         globalHealBonus = 0f;
     }
-
     public float GetGlobalSpeedBonus()
     {
         return globalSpeedBonus;
     }
-
     public void ResetGlobalSpeedBonus()
     {
-        globalSpeedBonus = 0f;
+        globalHealBonus = 0f;
     }
 }
