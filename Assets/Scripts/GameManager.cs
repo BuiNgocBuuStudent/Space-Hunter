@@ -85,18 +85,18 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateBulletRemaining(int bulletToAdd)
     {
-        bulletRemainingText.text = "Bullet: " + bulletToAdd;
+        bulletRemainingText.text = "" + bulletToAdd;
     }
 
     public void UpdateScore()
     {
-        scoreText.text = "Score: " + ++score;
+        scoreText.text = "" + ++score;
     }
 
     public void UpdateCoin(int coinToAdd)
     {
         coin += coinToAdd;
-        coinText.text = "Coin: " + coin;
+        coinText.text = "" + coin;
     }
 
 }
