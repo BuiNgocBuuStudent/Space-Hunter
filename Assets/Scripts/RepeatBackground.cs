@@ -1,27 +1,65 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 
 public class RepeatBackground : MonoBehaviour
 {
 
-    private Vector3 startPos;
-    private float repeatWidth;
+    public float scrollSpeed;
+    public float speedIncrement;
+    public float timeInterval;
+    private float offset;
+    private Material mat;
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-
-        startPos = transform.position;
-        repeatWidth = GetComponent<BoxCollider>().size.x / 2;
+        scrollSpeed = 0.5f;
+        speedIncrement = 0.5f;
+        timeInterval = 60.0f;
+        mat = GetComponent<Renderer>().material;
+        StartCoroutine(increaseScrollSpeed());
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        if(transform.position.x < startPos.x - repeatWidth)
+        if (!GameManager.Instance.isGameOver && !GameManager.Instance.isGamePause)
         {
-            transform.position = startPos;
+            offset += (Time.deltaTime * scrollSpeed) / 10;
+            mat.SetTextureOffset("_MainTex", new Vector2(offset, 0));
         }
+
+    }
+    IEnumerator increaseScrollSpeed()
+    {
+        while (!GameManager.Instance.isGameOver)
+        {
+            while (GameManager.Instance.isGamePause)
+            {
+                yield return null;
+            }
+
+            float elapsedTime = 0f;
+            while (elapsedTime < timeInterval)
+            {
+                if (GameManager.Instance.isGamePause || GameManager.Instance.isGameOver)
+                {
+                    yield return null;
+                }
+                else
+                {
+                    elapsedTime += Time.deltaTime;
+                }
+                yield return null;
+            }
+            if (!GameManager.Instance.isGameOver)
+            {
+                scrollSpeed += speedIncrement;
+                Debug.Log("Scroll speed: " + scrollSpeed);
+            }
+
+        }
+
     }
 }
