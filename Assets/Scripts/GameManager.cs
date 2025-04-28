@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -98,5 +99,16 @@ public class GameManager : MonoBehaviour
         coin += coinToAdd;
         coinText.text = "" + coin;
     }
-
+    public void PauseGame()
+    {
+        isGamePause = true;
+    }
+    public void ResumeGame()
+    {
+        isGamePause = false; 
+    }
+    public void RestartGame()
+    {
+        
+    }
 }
