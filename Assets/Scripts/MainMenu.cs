@@ -22,12 +22,12 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.sceneLoaded += OnPlaySceneLoad;
-        SceneManager.LoadSceneAsync("PlayScene");
+        SceneManager.LoadScene("PlayGame");
     }
 
     private void OnPlaySceneLoad(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "PlayScene")
+        if (scene.name == "PlayGame")
         {
             switch (selectedMode)
             {

@@ -19,7 +19,6 @@ public class ObjectPooler : MonoBehaviour
         if (SharedInstance == null)
         {
             SharedInstance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

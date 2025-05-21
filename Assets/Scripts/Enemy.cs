@@ -11,7 +11,6 @@ public class Enemy : MonoBehaviour
     public Move move;
     public float maxHealth;
     public float currentHealth;
-    public int income;
     private void Awake()
     {
         move = GetComponent<Move>();
@@ -53,7 +52,6 @@ public class Enemy : MonoBehaviour
         if (currentHealth <= 0)
         {
             GameManager.Instance.UpdateScore();
-            GameManager.Instance.UpdateCoin(income);
             Destroy(gameObject);
         }
     }

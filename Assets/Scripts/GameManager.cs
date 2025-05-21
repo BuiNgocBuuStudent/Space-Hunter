@@ -8,13 +8,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public Text bulletRemainingText;
+    [SerializeField] public Text bulletRemainingText;
 
-    public Text scoreText;
-    private int score;
-
-    public Text coinText;
-    private int coin;
+    [SerializeField] public Text highScoreText;
+    [SerializeField] public Text currentScoreText;
+    [SerializeField] private int score;
 
     public bool isGameOver;
     public bool isGamePause;
@@ -33,7 +31,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -42,7 +39,8 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        
+        highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
+        UpdateHighScore();
         StartGame();
     }
     // Update is called once per frame
@@ -84,31 +82,39 @@ public class GameManager : MonoBehaviour
         }
 
     }
-    public void UpdateBulletRemaining(int bulletToAdd)
+    public void UpdateBulletRemaining(int bullet)
     {
-        bulletRemainingText.text = "" + bulletToAdd;
+        bulletRemainingText.text = bullet.ToString();
     }
-
+    public void UpdateHighScore()
+    {
+        if (score > PlayerPrefs.GetInt("HighScore"))
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            highScoreText.text = score.ToString();
+        }
+    }
     public void UpdateScore()
     {
-        scoreText.text = "" + ++score;
+        score++;
+        currentScoreText.text = score.ToString();
+        UpdateHighScore();
     }
 
-    public void UpdateCoin(int coinToAdd)
-    {
-        coin += coinToAdd;
-        coinText.text = "" + coin;
-    }
-    public void PauseGame()
+    public void Pause()
     {
         isGamePause = true;
     }
-    public void ResumeGame()
+    public void Resume()
     {
-        isGamePause = false; 
+        isGamePause = false;
     }
-    public void RestartGame()
+    public void Restart()
     {
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void BackHome()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
