@@ -10,9 +10,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public Text bulletRemainingText;
 
-    [SerializeField] public Text highScoreText;
-    [SerializeField] public Text currentScoreText;
-    [SerializeField] private int score;
+    [SerializeField] private Text highScoreText;
+    [SerializeField] private Text currentScoreText;
+    private int score;
+
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private Text finalHighScoreText;
+    [SerializeField] private Text finalScoreText;
 
     public bool isGameOver;
     public bool isGamePause;
@@ -116,5 +120,15 @@ public class GameManager : MonoBehaviour
     public void BackHome()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void SetGameOverLogic()
+    {
+        if (isGameOver)
+        {
+            gameOverUI.SetActive(true);
+            finalScoreText.text = "Score: " + currentScoreText.text;
+            finalHighScoreText.text = "High score: " + highScoreText.text;
+        }
     }
 }

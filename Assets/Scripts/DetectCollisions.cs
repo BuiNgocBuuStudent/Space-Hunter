@@ -21,10 +21,11 @@ public class DetectCollisions : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Game Over");
+            Debug.Log("Game Over!!!");
             Destroy(other.gameObject);
 
             GameManager.Instance.isGameOver = true;
+            GameManager.Instance.SetGameOverLogic();
         }
         if (other.gameObject.CompareTag("Boost"))
         {

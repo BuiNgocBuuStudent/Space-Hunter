@@ -1165,6 +1165,9 @@ MonoBehaviour:
   bulletRemainingText: {fileID: 1115325800}
   highScoreText: {fileID: 1467754513}
   currentScoreText: {fileID: 521128970}
+  gameOverUI: {fileID: 1083036709}
+  finalHighScoreText: {fileID: 472445386}
+  finalScoreText: {fileID: 1042779129}
   isGameOver: 0
   isGamePause: 0
   spawnPoints:
@@ -1175,7 +1178,7 @@ MonoBehaviour:
   - {fileID: 4564647263691044883, guid: 62115ed078d942c47ab8f30aa9d9f31e, type: 3}
   - {fileID: 6154550348750401381, guid: 446fe6cc850eab943b876ed2907618ee, type: 3}
   - {fileID: 6467796485199524224, guid: 34b2820f617abbe44aa2c1a6495359e1, type: 3}
-  powerupPrefab: {fileID: 9089233310225096202, guid: 39539a0f3e1a41f4b8c4f3daac0033bb, type: 3}
+  powerupPrefab: {fileID: 4835729960477293442, guid: 39539a0f3e1a41f4b8c4f3daac0033bb, type: 3}
   spawnRateEnemy: 2
   spawnRatePowerup: 30
   startTimeSpawnPowerup: 10
@@ -1663,8 +1666,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 427823732}
-  - {fileID: 1037914545}
   - {fileID: 980696687}
+  - {fileID: 1037914545}
   m_Father: {fileID: 1083036710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3828,7 +3831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1083036710
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4448,7 +4451,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -43.8}
+  m_AnchoredPosition: {x: 0, y: -43.800003}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1557627538

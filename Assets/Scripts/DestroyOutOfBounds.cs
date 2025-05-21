@@ -20,6 +20,7 @@ public class DestroyOutOfBounds : MonoBehaviour
             {
                 Debug.Log("Game Over!!");
                 GameManager.Instance.isGameOver = true;
+                GameManager.Instance.SetGameOverLogic();
             }
             Destroy(gameObject);
         }
