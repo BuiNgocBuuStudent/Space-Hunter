@@ -7,14 +7,14 @@ using UnityEngine.UI;
 public class BoostManager : MonoBehaviour
 {
     public GameObject uiBoostGameObject;
-    public Bullet bullet;
+    public Ammo bullet;
     public Gun gun;
 
 
     [SerializeField]
-    private List<Boost> boostList;
+    private List<BoostEntity> boostList;
 
-    public List<Boost> boostSelectedList;
+    public List<BoostEntity> boostSelectedList;
 
     [SerializeField]
     private List<Text> textList;
@@ -34,11 +34,11 @@ public class BoostManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (Boost boost in boostList)
+        foreach (BoostEntity boost in boostList)
         {
             totalWeight += boost.weight;
         }
-        boostSelectedList = new List<Boost>();
+        boostSelectedList = new List<BoostEntity>();
     }
 
     // Update is called per frame
@@ -51,8 +51,8 @@ public class BoostManager : MonoBehaviour
     }
     private void setupLogical()
     {
-        Boost boostToShow;
-        List<Boost> cloneBoostsList = new List<Boost>(boostList);
+        BoostEntity boostToShow;
+        List<BoostEntity> cloneBoostsList = new List<BoostEntity>(boostList);
         cloneOfTotalWeight = totalWeight;
 
         foreach (Text text in textList)
@@ -64,9 +64,9 @@ public class BoostManager : MonoBehaviour
         }
     }
 
-    private Boost getRandomBoost(List<Boost> cloneBoostsList)
+    private BoostEntity getRandomBoost(List<BoostEntity> cloneBoostsList)
     {
-        Boost currentBoost = null;
+        BoostEntity currentBoost = null;
 
         if (cloneBoostsList.Count == 0)
             return cloneBoostsList[0];
@@ -74,7 +74,7 @@ public class BoostManager : MonoBehaviour
         float randomNumber = Random.Range(0, cloneOfTotalWeight);
 
         float cumulativeWeight = 0;
-        foreach (Boost boost in cloneBoostsList)
+        foreach (BoostEntity boost in cloneBoostsList)
         {
             cumulativeWeight += boost.weight;
             if (randomNumber <= cumulativeWeight)
@@ -89,7 +89,7 @@ public class BoostManager : MonoBehaviour
 
         return currentBoost;
     }
-    private void selectBoost(Boost selectedBoost)
+    private void selectBoost(BoostEntity selectedBoost)
     {
 
         switch (selectedBoost.name)
@@ -97,6 +97,8 @@ public class BoostManager : MonoBehaviour
             case "Boost 1":
                 Debug.Log("Boost 1 is selected");
                 gun.maxAmmo += 1;
+                ObjectPooler.SharedInstance.amountToPool += 1;
+                ObjectPooler.SharedInstance.AddPooledObject();
                 break;
             case "Boost 2":
                 Debug.Log("Boost 2 is selected");
@@ -104,12 +106,14 @@ public class BoostManager : MonoBehaviour
                 break;
             case "Boost 3":
                 Debug.Log("Boost 3 is selected");
-                countdownTime = 5;
+                countdownTime = 10;
                 StartCoroutine(boostDamage());
                 break;
             case "Boost 4":
                 Debug.Log("Boost 4 is selected");
                 gun.maxAmmo += 2;
+                ObjectPooler.SharedInstance.amountToPool += 2;
+                ObjectPooler.SharedInstance.AddPooledObject();
                 break;
             case "Boost 5":
                 Debug.Log("Boost 5 is selected");
@@ -117,12 +121,13 @@ public class BoostManager : MonoBehaviour
                 break;
             default:
                 Debug.Log("Boost 6 is selected");
-                countdownTime = 10;
+                countdownTime = 20;
                 StartCoroutine(boostDamage());
                 break;
         }
-        uiBoostGameObject.SetActive(false);
         GameManager.Instance.isGamePause = false;
+        uiBoostGameObject.SetActive(false);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.reload);
     }
     IEnumerator boostDamage()
     {

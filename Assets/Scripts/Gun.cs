@@ -8,7 +8,8 @@ public class Gun : MonoBehaviour
     private int currentAmmo;
     public float reloadTime;
 
-    private bool isReloading = false;
+    [SerializeField] private bool isReloading = false;
+    [SerializeField] private bool wasZeroAmmo = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,8 @@ public class Gun : MonoBehaviour
         currentAmmo = maxAmmo;
         GameManager.Instance.UpdateBulletRemaining(currentAmmo);
         reloadTime = 1.0f;
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.reload);
+
     }
 
     // Update is called once per frame
@@ -33,17 +36,27 @@ public class Gun : MonoBehaviour
 
     private void CheckMagazine()
     {
+        if (currentAmmo == 0 && !wasZeroAmmo)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.reload);
+            wasZeroAmmo = true;
+        }
+        else if(currentAmmo > 0)
+        {
+            wasZeroAmmo = false;
+        }
+
         if (isReloading || currentAmmo >= maxAmmo)
             return;
         if (currentAmmo < maxAmmo)
         {
             StartCoroutine(ReLoad());
         }
+
     }
     IEnumerator ReLoad()
     {
         isReloading = true;
-        //Debug.Log("Reloading...");
 
         while (currentAmmo < maxAmmo)
         {
@@ -59,7 +72,6 @@ public class Gun : MonoBehaviour
         }
 
         isReloading = false;
-        //Debug.Log("Reloading finished.");
     }
 
     private void Shoot()
@@ -70,8 +82,9 @@ public class Gun : MonoBehaviour
             pooledProjectile.SetActive(true);
             currentAmmo--;
             GameManager.Instance.UpdateBulletRemaining(currentAmmo);
-            pooledProjectile.transform.position = new Vector3(transform.position.x + 1.5f, transform.position.y + 0.2f, transform.position.z);
+            pooledProjectile.transform.position = new Vector3(transform.position.x + 1.3f, transform.position.y, transform.position.z);
         }
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.shoot);
     }
 
 }

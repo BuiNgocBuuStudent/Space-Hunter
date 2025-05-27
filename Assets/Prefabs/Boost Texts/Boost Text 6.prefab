@@ -79,7 +79,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "T\u0103ng g\u1EA5p \u0111\xF4i s\xE1t th\u01B0\u01A1ng trong v\xF2ng 10s"
+  m_Text: "T\u0103ng g\u1EA5p \u0111\xF4i s\xE1t th\u01B0\u01A1ng trong v\xF2ng 20s"
 --- !u!114 &-3898356249984817491
 MonoBehaviour:
   m_ObjectHideFlags: 0

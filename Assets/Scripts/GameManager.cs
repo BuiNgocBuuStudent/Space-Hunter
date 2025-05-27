@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [SerializeField] public Text bulletRemainingText;
+    [SerializeField] public Text ammoText;
 
     [SerializeField] private Text highScoreText;
     [SerializeField] private Text currentScoreText;
@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
 
             int index = Random.Range(0, enemyPrefabs.Count);
             Instantiate(enemyPrefabs[index]);
+
         }
     }
 
@@ -88,7 +89,7 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateBulletRemaining(int bullet)
     {
-        bulletRemainingText.text = bullet.ToString();
+        ammoText.text = bullet.ToString();
     }
     public void UpdateHighScore()
     {
@@ -122,13 +123,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void SetGameOverLogic()
+    public void SetGameOverUI()
     {
         if (isGameOver)
         {
             gameOverUI.SetActive(true);
-            finalScoreText.text = "Score: " + currentScoreText.text;
-            finalHighScoreText.text = "High score: " + highScoreText.text;
+            finalScoreText.text = currentScoreText.text;
+            finalHighScoreText.text = highScoreText.text;
         }
     }
 }

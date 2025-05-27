@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private List<Vector3> spawnPoints;
 
-    public Bullet bullet;
+    public Ammo bullet;
     public Move move;
     public float maxHealth;
     public float currentHealth;
@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     {
         maxHealth += healAmount;
         move.speed += speedAmount;
-        Debug.Log("Max health increased to: " + maxHealth + "and speed: " + move.speed);
+        Debug.Log("Max health increased to: " + maxHealth + ", and speed: " + move.speed);
     }
 
     private Vector3 RandomPos()
@@ -52,6 +52,7 @@ public class Enemy : MonoBehaviour
         if (currentHealth <= 0)
         {
             GameManager.Instance.UpdateScore();
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.enemyDie);
             Destroy(gameObject);
         }
     }
@@ -65,6 +66,7 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet"))
         {
             IsAttacked(bullet.damage);
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.hit);
             other.gameObject.SetActive(false);
         }
     }

@@ -7,8 +7,7 @@ public class ObjectPooler : MonoBehaviour
 {
 
     public static ObjectPooler SharedInstance;
-    [SerializeField]
-    private GameObject objectToPool;
+    public GameObject objectToPool;
     public int amountToPool;
 
     [SerializeField]
@@ -29,7 +28,12 @@ public class ObjectPooler : MonoBehaviour
     private void Start()
     {
         pooledObjects = new List<GameObject>();
+        AddPooledObject();
+    }
 
+    public void AddPooledObject()
+    {
+        pooledObjects.Clear();
         for (int i = 0; i < amountToPool; i++)
         {
             GameObject obj = Instantiate(objectToPool);
@@ -38,7 +42,6 @@ public class ObjectPooler : MonoBehaviour
             obj.transform.SetParent(this.transform);
         }
     }
-
     public GameObject GetPooledObject()
     {
        for(int i = 0; i < pooledObjects.Count; i++)

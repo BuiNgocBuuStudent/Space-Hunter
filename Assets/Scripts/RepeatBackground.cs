@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Xml;
 using UnityEngine;
 
 public class RepeatBackground : MonoBehaviour
@@ -14,9 +13,9 @@ public class RepeatBackground : MonoBehaviour
 
     private void Start()
     {
-        scrollSpeed = 0.5f;
-        speedIncrement = 0.5f;
-        timeInterval = 60.0f;
+        scrollSpeed = 1.0f;
+        speedIncrement = 1.0f;
+        timeInterval = 90.0f;
         mat = GetComponent<Renderer>().material;
         StartCoroutine(increaseScrollSpeed());
     }
