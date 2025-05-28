@@ -29,6 +29,12 @@ public class PlayerController : MonoBehaviour
                 MoveDown();
             }
         }
+        if (GameManager.Instance.isGamePause)
+        {
+            animator.speed = 0f;
+        }
+        else
+            animator.speed = 1f;
     }
     private void MoveUp()
     {
@@ -49,7 +55,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Game Over!!!");
 
             GameManager.Instance.isGameOver = true;
-            if(animator != null)
+            if (animator != null)
             {
                 animator.SetTrigger("DieTrigger");
             }

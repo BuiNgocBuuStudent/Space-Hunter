@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
 
     public Ammo bullet;
     public Move move;
+    public HealthBar healthBar;
     public float maxHealth;
     public float currentHealth;
     private void Awake()
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
         spawnPoints = GameManager.Instance.spawnPoints;
         transform.position = RandomPos();
     }
@@ -36,6 +38,7 @@ public class Enemy : MonoBehaviour
     private void IncHealthAndSpeed(float healAmount, float speedAmount)
     {
         maxHealth += healAmount;
+        healthBar.SetMaxHealth(maxHealth);
         move.speed += speedAmount;
         Debug.Log("Max health increased to: " + maxHealth + ", and speed: " + move.speed);
     }
@@ -59,6 +62,7 @@ public class Enemy : MonoBehaviour
     public void IsAttacked(int damage)
     {
         currentHealth -= damage;
+        healthBar.SetHeath(currentHealth);
     }
     
     private void OnTriggerEnter(Collider other)
