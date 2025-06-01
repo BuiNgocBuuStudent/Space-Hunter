@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     public HealthBar healthBar;
     public float maxHealth;
     public float currentHealth;
+
+    [SerializeField] private ParticleSystem explosionParticle;
     private void Awake()
     {
         move = GetComponent<Move>();
@@ -40,14 +42,13 @@ public class Enemy : MonoBehaviour
         maxHealth += healAmount;
         healthBar.SetMaxHealth(maxHealth);
         move.speed += speedAmount;
-        Debug.Log("Max health increased to: " + maxHealth + ", and speed: " + move.speed);
     }
 
     private Vector3 RandomPos()
     {
         int index = Random.Range(0, spawnPoints.Count);
         return spawnPoints[index];
-        
+
     }
     // Update is called once per frame
     void Update()
@@ -55,7 +56,8 @@ public class Enemy : MonoBehaviour
         if (currentHealth <= 0)
         {
             GameManager.Instance.UpdateScore();
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.enemyDie);
+            SFXManager.Instance.PlaySFX(SFXType.enemyDie);
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             Destroy(gameObject);
         }
     }
@@ -64,13 +66,13 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         healthBar.SetHeath(currentHealth);
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
             IsAttacked(bullet.damage);
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.hit);
+            SFXManager.Instance.PlaySFX(SFXType.hit);
             other.gameObject.SetActive(false);
         }
     }

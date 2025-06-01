@@ -24,10 +24,10 @@ public class DestroyOutOfBounds : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else if(transform.position.x > -limitPosX + 2)
+        else if (transform.position.x > -limitPosX + 2)
         {
             gameObject.SetActive(false);
-            
+
         }
     }
 }

@@ -362,6 +362,7 @@ MonoBehaviour:
   healthBar: {fileID: 8533094571881133095}
   maxHealth: 2
   currentHealth: 0
+  explosionParticle: {fileID: 2088871590894813759, guid: 745208c9d6e104225bd99e1ab894e3bb, type: 3}
 --- !u!1 &7300213101865424283
 GameObject:
   m_ObjectHideFlags: 0

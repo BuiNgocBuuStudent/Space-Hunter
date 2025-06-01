@@ -11,19 +11,18 @@ public class BoostManager : MonoBehaviour
     public Gun gun;
 
 
-    [SerializeField]
-    private List<BoostEntity> boostList;
+    [SerializeField] private List<BoostEntity> boostList;
 
     public List<BoostEntity> boostSelectedList;
 
-    [SerializeField]
-    private List<Text> textList;
+    [SerializeField] private List<Text> textList;
 
     public List<Button> selectBtn;
     private float totalWeight;
     private float cloneOfTotalWeight;
 
-    private float countdownTime;
+    [SerializeField] private GameObject boostDmgIndicator;
+    private float boostDmgDuration;
 
     private void Awake()
     {
@@ -106,7 +105,8 @@ public class BoostManager : MonoBehaviour
                 break;
             case "Boost 3":
                 Debug.Log("Boost 3 is selected");
-                countdownTime = 10;
+                boostDmgDuration = 10;
+                boostDmgIndicator.SetActive(true);
                 StartCoroutine(boostDamage());
                 break;
             case "Boost 4":
@@ -121,13 +121,14 @@ public class BoostManager : MonoBehaviour
                 break;
             default:
                 Debug.Log("Boost 6 is selected");
-                countdownTime = 20;
+                boostDmgDuration = 20;
+                boostDmgIndicator.SetActive(true);
                 StartCoroutine(boostDamage());
                 break;
         }
         GameManager.Instance.isGamePause = false;
         uiBoostGameObject.SetActive(false);
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.reload);
+        SFXManager.Instance.PlaySFX(SFXType.reload);
     }
     IEnumerator boostDamage()
     {
@@ -135,11 +136,11 @@ public class BoostManager : MonoBehaviour
 
         bullet.damage = 2;
         Debug.Log("Current damage: " + bullet.damage);
-        yield return new WaitForSeconds(countdownTime);
+        yield return new WaitForSeconds(boostDmgDuration);
 
         bullet.damage = 1;
+        boostDmgIndicator.SetActive(false);
         Debug.Log("Current damage: " + bullet.damage);
-
         Debug.Log("Boosting finish");
     }
 }

@@ -59,6 +59,7 @@ public class EnemyController : MonoBehaviour
                 globalHealBonus += healAmount;
                 globalSpeedBonus += speedAmount;
                 OnHeal?.Invoke(healAmount, speedAmount);
+                SFXManager.Instance.PlaySFX(SFXType.warning);
                 Debug.Log("Notified all health and speed of enemies increase!!!");
             }
 

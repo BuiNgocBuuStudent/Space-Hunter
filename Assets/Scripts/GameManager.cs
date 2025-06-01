@@ -117,6 +117,8 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        int index = Random.Range(0, 2);
+        MusicManager.Instance.PlayMusic((MusicType)index);
     }
     public void BackHome()
     {

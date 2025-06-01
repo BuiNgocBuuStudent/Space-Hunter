@@ -79,8 +79,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "T\u0103ng th\xEAm k\xEDch th\u01B0\u1EDBc b\u0103ng \u0111\u1EA1n l\xEAn
-    2"
+  m_Text: Increase magazine size by 2
 --- !u!114 &-3898356249984817491
 MonoBehaviour:
   m_ObjectHideFlags: 0

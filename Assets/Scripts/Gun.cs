@@ -17,7 +17,7 @@ public class Gun : MonoBehaviour
         currentAmmo = maxAmmo;
         GameManager.Instance.UpdateBulletRemaining(currentAmmo);
         reloadTime = 1.0f;
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.reload);
+        SFXManager.Instance.PlaySFX(SFXType.reload);
 
     }
 
@@ -38,7 +38,7 @@ public class Gun : MonoBehaviour
     {
         if (currentAmmo == 0 && !wasZeroAmmo)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.reload);
+            SFXManager.Instance.PlaySFX(SFXType.reload);
             wasZeroAmmo = true;
         }
         else if(currentAmmo > 0)
@@ -84,7 +84,7 @@ public class Gun : MonoBehaviour
             GameManager.Instance.UpdateBulletRemaining(currentAmmo);
             pooledProjectile.transform.position = new Vector3(transform.position.x + 1.3f, transform.position.y, transform.position.z);
         }
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.shoot);
+        SFXManager.Instance.PlaySFX(SFXType.shoot);
     }
 
 }
