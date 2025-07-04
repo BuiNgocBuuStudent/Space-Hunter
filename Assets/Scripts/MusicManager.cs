@@ -5,20 +5,19 @@ public enum MusicType {  combatTheme1, combatTheme2, menuTheme };
 
 public class MusicManager : MonoBehaviour
 {
-    public static MusicManager Instance;
+    private static MusicManager _instance;
+    public static MusicManager Instance => _instance;
 
     public AudioSource musicSource;
     private void Awake()
     {
-        if(Instance == null)
+        if (_instance != null && _instance != this)
         {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
+            Destroy(gameObject);
+            return;
         }
-        else
-        {
-            Destroy(this);
-        }
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     private void OnValidate()
     {

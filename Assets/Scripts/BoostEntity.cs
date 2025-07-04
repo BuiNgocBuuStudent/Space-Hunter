@@ -9,5 +9,4 @@ public class BoostEntity : MonoBehaviour
     public Text boostDescription;
     public float weight;
 
-   
 }

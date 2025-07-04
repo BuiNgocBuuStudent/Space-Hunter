@@ -3,38 +3,39 @@ using UnityEngine;
 
 public class RepeatBackground : MonoBehaviour
 {
+    private GameManager gameManager;
 
     public float scrollSpeed;
     public float speedIncrement;
     public float timeInterval;
-    private float offset;
-    private Material mat;
-
+    private float _offset;
+    private Material _mat;
 
     private void Start()
     {
+        gameManager = GameManager.Instance;
         scrollSpeed = 1.0f;
         speedIncrement = 1.0f;
         timeInterval = 90.0f;
-        mat = GetComponent<Renderer>().material;
+        _mat = GetComponent<Renderer>().material;
         StartCoroutine(increaseScrollSpeed());
     }
 
 
     void Update()
     {
-        if (!GameManager.Instance.isGameOver && !GameManager.Instance.isGamePause)
+        if (!gameManager.isGameOver && !gameManager.isGamePause)
         {
-            offset += (Time.deltaTime * scrollSpeed) / 10;
-            mat.SetTextureOffset("_MainTex", new Vector2(offset, 0));
+            _offset += (Time.deltaTime * scrollSpeed) / 10;
+            _mat.SetTextureOffset("_MainTex", new Vector2(_offset, 0));
         }
 
     }
     IEnumerator increaseScrollSpeed()
     {
-        while (!GameManager.Instance.isGameOver)
+        while (!gameManager.isGameOver)
         {
-            while (GameManager.Instance.isGamePause)
+            while (gameManager.isGamePause)
             {
                 yield return null;
             }
@@ -42,7 +43,7 @@ public class RepeatBackground : MonoBehaviour
             float elapsedTime = 0f;
             while (elapsedTime < timeInterval)
             {
-                if (GameManager.Instance.isGamePause || GameManager.Instance.isGameOver)
+                if (gameManager.isGamePause || GameManager.Instance.isGameOver)
                 {
                     yield return null;
                 }
@@ -52,10 +53,9 @@ public class RepeatBackground : MonoBehaviour
                 }
                 yield return null;
             }
-            if (!GameManager.Instance.isGameOver)
+            if (!gameManager.isGameOver)
             {
                 scrollSpeed += speedIncrement;
-                Debug.Log("Scroll speed: " + scrollSpeed);
             }
 
         }

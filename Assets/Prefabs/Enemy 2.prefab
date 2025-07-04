@@ -356,13 +356,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae16578172d827642bf3c587bf52e811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints: []
-  bullet: {fileID: -7199293693527480087, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
-  move: {fileID: 0}
-  healthBar: {fileID: 8533094571881133095}
-  maxHealth: 2
-  currentHealth: 0
-  explosionParticle: {fileID: 2088871590894813759, guid: 745208c9d6e104225bd99e1ab894e3bb, type: 3}
+  _spawnPoints: []
+  _bullet: {fileID: -7199293693527480087, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
+  _move: {fileID: 0}
+  _healthBar: {fileID: 8533094571881133095}
+  _maxHealth: 2
+  _currentHealth: 0
+  _explosionParticle: {fileID: 2088871590894813759, guid: 745208c9d6e104225bd99e1ab894e3bb, type: 3}
 --- !u!1 &7300213101865424283
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,6 +607,14 @@ PrefabInstance:
     - target: {fileID: 4721473126883556, guid: b9db55cf82dad3d4aa710ac6a6b0a3b1, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23583631986834334, guid: b9db55cf82dad3d4aa710ac6a6b0a3b1, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23583631986834334, guid: b9db55cf82dad3d4aa710ac6a6b0a3b1, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

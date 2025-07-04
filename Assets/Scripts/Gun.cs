@@ -5,17 +5,20 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     public int maxAmmo;
-    private int currentAmmo;
+    private int _currentAmmo;
     public float reloadTime;
 
-    [SerializeField] private bool isReloading = false;
-    [SerializeField] private bool wasZeroAmmo = false;
+    [SerializeField] bool _isReloading;
+    [SerializeField] bool _wasZeroAmmo;
+
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        maxAmmo = ObjectPooler.SharedInstance.amountToPool;
-        currentAmmo = maxAmmo;
-        GameManager.Instance.UpdateBulletRemaining(currentAmmo);
+        gameManager = GameManager.Instance;
+        maxAmmo = ObjectPooler.Instance.amountToPool;
+        _currentAmmo = maxAmmo;
+        gameManager.UpdateBulletRemaining(_currentAmmo);
         reloadTime = 1.0f;
         SFXManager.Instance.PlaySFX(SFXType.reload);
 
@@ -24,64 +27,56 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isGamePause)
+        if (gameManager.isGameOver || gameManager.isGamePause)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Space) && currentAmmo >= 1)
+        if (Input.GetKeyDown(KeyCode.Space) && _currentAmmo >= 1)
             Shoot();
 
         CheckMagazine();
-
     }
 
     private void CheckMagazine()
     {
-        if (currentAmmo == 0 && !wasZeroAmmo)
+        if (_isReloading || _currentAmmo >= maxAmmo)
+            return;
+
+        if (_currentAmmo == 0 && !_wasZeroAmmo)
         {
             SFXManager.Instance.PlaySFX(SFXType.reload);
-            wasZeroAmmo = true;
+            _wasZeroAmmo = true;
         }
-        else if(currentAmmo > 0)
-        {
-            wasZeroAmmo = false;
-        }
+        else if (_currentAmmo > 0)
+            _wasZeroAmmo = false;
 
-        if (isReloading || currentAmmo >= maxAmmo)
-            return;
-        if (currentAmmo < maxAmmo)
-        {
+        if (_currentAmmo < maxAmmo)
             StartCoroutine(ReLoad());
-        }
-
     }
     IEnumerator ReLoad()
     {
-        isReloading = true;
+        _isReloading = true;
 
-        while (currentAmmo < maxAmmo)
+        while (_currentAmmo < maxAmmo)
         {
-            if (GameManager.Instance.isGameOver || GameManager.Instance.isGamePause)
-            {
-                isReloading = false;
-                yield break;
-            }
+            if (gameManager.isGameOver || gameManager.isGamePause)
+                _isReloading = false;
 
             yield return new WaitForSeconds(reloadTime);
-            currentAmmo++;
-            GameManager.Instance.UpdateBulletRemaining(currentAmmo);
+            _currentAmmo++;
+            gameManager.UpdateBulletRemaining(_currentAmmo);
         }
 
-        isReloading = false;
+        _isReloading = false;
     }
 
     private void Shoot()
     {
-        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+        GameObject pooledProjectile = ObjectPooler.Instance.GetPooledObject();
         if (pooledProjectile != null)
         {
             pooledProjectile.SetActive(true);
-            currentAmmo--;
-            GameManager.Instance.UpdateBulletRemaining(currentAmmo);
+            _currentAmmo--;
+            gameManager.UpdateBulletRemaining(_currentAmmo);
             pooledProjectile.transform.position = new Vector3(transform.position.x + 1.3f, transform.position.y, transform.position.z);
         }
         SFXManager.Instance.PlaySFX(SFXType.shoot);

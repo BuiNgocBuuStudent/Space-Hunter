@@ -96,7 +96,7 @@ namespace VolumetricLines
 		/// <summary>
 		/// Gets or sets whether or not the template material properties
 		/// should be used (false) or if the properties of this MonoBehavior
-		/// instance should be used (true, default).
+		/// _instance should be used (true, default).
 		/// Setting this will only have an impact once, and then only if it
 		/// is set before TemplateMaterial has been assigned.
 		/// </summary>
@@ -169,7 +169,7 @@ namespace VolumetricLines
 
 		#region methods
 		/// <summary>
-		/// Creates a copy of the template material for this instance
+		/// Creates a copy of the template material for this _instance
 		/// </summary>
 		private void CreateMaterial()
 		{
@@ -189,7 +189,7 @@ namespace VolumetricLines
 		}
 
 		/// <summary>
-		/// Destroys the copy of the template material which was used for this instance
+		/// Destroys the copy of the template material which was used for this _instance
 		/// </summary>
 		private void DestroyMaterial()
 		{

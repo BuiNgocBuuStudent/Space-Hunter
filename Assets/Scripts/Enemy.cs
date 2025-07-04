@@ -1,77 +1,83 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private List<Vector3> spawnPoints;
+    private EnemyManager _enemyManager; 
+    private GameManager _gameManager;
+    [SerializeField] List<Vector3> _spawnPoints;
 
-    public Ammo bullet;
-    public Move move;
-    public HealthBar healthBar;
-    public float maxHealth;
-    public float currentHealth;
+    [SerializeField] Bullet _bullet;
+    [SerializeField] Move _move;
+    [SerializeField] HealthBar _healthBar;
+    [SerializeField] float _maxHealth;
+    [SerializeField] float _currentHealth;
 
-    [SerializeField] private ParticleSystem explosionParticle;
+    [SerializeField] ParticleSystem _explosionParticle;
     private void Awake()
     {
-        move = GetComponent<Move>();
-        move.speed += EnemyController.Instance.GetGlobalSpeedBonus();
-        maxHealth += EnemyController.Instance.GetGlobalHealBonus();
+        _enemyManager = EnemyManager.Instance;
+        _move = GetComponent<Move>();
+        _move.speed += _enemyManager.GetGlobalSpeedBonus();
+        _maxHealth += _enemyManager.GetGlobalHealBonus();
     }
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
-        spawnPoints = GameManager.Instance.spawnPoints;
+    }
+    public void Init()
+    {
+        _gameManager = GameManager.Instance;
+        _currentHealth = _maxHealth;
+        _healthBar.SetMaxHealth(_maxHealth);
+        _spawnPoints = _gameManager.spawnPoints;
         transform.position = RandomPos();
     }
     private void OnEnable()
     {
-        EnemyController.OnHeal += IncHealthAndSpeed;
+        EnemyManager.OnHeal += IncHealthAndSpeed;
     }
     private void OnDisable()
     {
-        EnemyController.OnHeal -= IncHealthAndSpeed;
+        EnemyManager.OnHeal -= IncHealthAndSpeed;
     }
 
     private void IncHealthAndSpeed(float healAmount, float speedAmount)
     {
-        maxHealth += healAmount;
-        healthBar.SetMaxHealth(maxHealth);
-        move.speed += speedAmount;
+        _maxHealth += healAmount;
+        _healthBar.SetMaxHealth(_maxHealth);
+        _move.speed += speedAmount;
     }
 
     private Vector3 RandomPos()
     {
-        int index = Random.Range(0, spawnPoints.Count);
-        return spawnPoints[index];
+        int index = Random.Range(0, _spawnPoints.Count);
+        return _spawnPoints[index];
 
     }
     // Update is called once per frame
     void Update()
     {
-        if (currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
-            GameManager.Instance.UpdateScore();
+            _gameManager.UpdateScore();
             SFXManager.Instance.PlaySFX(SFXType.enemyDie);
-            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
-            Destroy(gameObject);
+            Instantiate(_explosionParticle, transform.position, _explosionParticle.transform.rotation);
+            gameObject.SetActive(false);
         }
     }
     public void IsAttacked(int damage)
     {
-        currentHealth -= damage;
-        healthBar.SetHeath(currentHealth);
+        _currentHealth -= damage;
+        _healthBar.SetHeath(_currentHealth);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            IsAttacked(bullet.damage);
+            IsAttacked(_bullet.damage);
             SFXManager.Instance.PlaySFX(SFXType.hit);
             other.gameObject.SetActive(false);
         }

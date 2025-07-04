@@ -4,22 +4,21 @@ public enum SFXType { reload, shoot, enemyDie, hit, warning };
 
 public class SFXManager : MonoBehaviour
 {
-    public static SFXManager Instance;
+    private static SFXManager _instance;
+    public static SFXManager Instance => _instance;
 
     public AudioSource sfxSource;
 
 
     private void Awake()
     {
-        if (Instance == null)
+        if (_instance != null && _instance != this)
         {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
+            Destroy(gameObject);
+            return;
         }
-        else
-        {
-            Destroy(this);
-        }
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnValidate()

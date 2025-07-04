@@ -1000,26 +1000,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8d7801858b177499ccdac09be8f31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoText: {fileID: 1115325800}
-  highScoreText: {fileID: 1467754513}
-  currentScoreText: {fileID: 521128970}
-  gameOverUI: {fileID: 1083036709}
-  finalHighScoreText: {fileID: 551526578}
-  finalScoreText: {fileID: 714114427}
+  _ammoText: {fileID: 1115325800}
+  _highScoreText: {fileID: 1467754513}
+  _currentScoreText: {fileID: 521128970}
+  _gameOverUI: {fileID: 1083036709}
+  _finalHighScoreText: {fileID: 551526578}
+  _finalScoreText: {fileID: 714114427}
   isGameOver: 0
   isGamePause: 0
   spawnPoints:
   - {x: 22, y: 6.5, z: -2.5}
   - {x: 22, y: 1.5, z: -2.5}
   - {x: 22, y: -3.5, z: -2.5}
-  enemyPrefabs:
-  - {fileID: 4564647263691044883, guid: 62115ed078d942c47ab8f30aa9d9f31e, type: 3}
-  - {fileID: 6154550348750401381, guid: 446fe6cc850eab943b876ed2907618ee, type: 3}
-  - {fileID: 6467796485199524224, guid: 34b2820f617abbe44aa2c1a6495359e1, type: 3}
-  powerupPrefab: {fileID: 4835729960477293442, guid: 39539a0f3e1a41f4b8c4f3daac0033bb, type: 3}
-  spawnRateEnemy: 2
-  spawnRatePowerup: 30
-  startTimeSpawnPowerup: 10
 --- !u!4 &289224499
 Transform:
   m_ObjectHideFlags: 0
@@ -1047,7 +1039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c13e1ade5e5604d8b0e4db03aa4d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToPool: {fileID: 6472950778470344877, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
+  _objectToPool: {fileID: 6472950778470344877, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
   amountToPool: 5
   pooledObjects: []
 --- !u!114 &289224501
@@ -1062,11 +1054,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a61e08c0ee5303448651dcbe197c970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyPrefabs:
+  - {fileID: 7353409964941739342, guid: 62115ed078d942c47ab8f30aa9d9f31e, type: 3}
+  - {fileID: -6655623139053124560, guid: 446fe6cc850eab943b876ed2907618ee, type: 3}
+  - {fileID: -5889504488080633041, guid: 34b2820f617abbe44aa2c1a6495359e1, type: 3}
   timeInterval: 0
   healAmount: 0
   globalHealBonus: 0
   speedAmount: 0
   globalSpeedBonus: 0
+  spawnRateEnemy: 0
 --- !u!1 &295584219
 GameObject:
   m_ObjectHideFlags: 0
@@ -6128,15 +6125,15 @@ MonoBehaviour:
   uiBoostGameObject: {fileID: 1966780432}
   bullet: {fileID: -7199293693527480087, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
   gun: {fileID: 3904359997771101381}
-  boostList:
+  _boostList:
   - {fileID: -837589097559667618, guid: 1974f858a97765740892df3aea2a9576, type: 3}
   - {fileID: -837589097559667618, guid: d5a3518748a46e84a908e481b3e03333, type: 3}
   - {fileID: -837589097559667618, guid: 69411ee3c5b4fb64a9b97a1fe893bf34, type: 3}
   - {fileID: -837589097559667618, guid: ca072da045541954fba7d47dca433513, type: 3}
   - {fileID: -837589097559667618, guid: 92e703df097bfa649a64aa5d97c962fe, type: 3}
   - {fileID: -837589097559667618, guid: 19bc71fb1ad296e4798b25425bd563fd, type: 3}
-  boostSelectedList: []
-  textList:
+  _boostSelectedList: []
+  _textList:
   - {fileID: 125658733}
   - {fileID: 1854378715}
   - {fileID: 1538014687}
@@ -6144,7 +6141,10 @@ MonoBehaviour:
   - {fileID: 269420118}
   - {fileID: 1364776874}
   - {fileID: 1942205602}
-  boostDmgIndicator: {fileID: 1493663671}
+  _boostDmgIndicator: {fileID: 1493663671}
+  _boostPrefab: {fileID: 6998514336921716657, guid: 39539a0f3e1a41f4b8c4f3daac0033bb, type: 3}
+  spawnRateBoost: 0
+  startTimeSpawnBoost: 0
 --- !u!1001 &3904359997771101377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6158,12 +6158,20 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 660460498681436622, guid: c475b56483ffafe478945c29bdd3bac2, type: 3}
+      propertyPath: _distance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 660460498681436622, guid: c475b56483ffafe478945c29bdd3bac2, type: 3}
       propertyPath: limitPosY
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 660460498681436622, guid: c475b56483ffafe478945c29bdd3bac2, type: 3}
       propertyPath: moveSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 660460498681436622, guid: c475b56483ffafe478945c29bdd3bac2, type: 3}
+      propertyPath: _limitPosY
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 705957634801282499, guid: c475b56483ffafe478945c29bdd3bac2, type: 3}
       propertyPath: m_Enabled

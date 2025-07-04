@@ -3,48 +3,50 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    private BoostManager boostManager;
-    private Animator animator;
+    private GameManager _gameManager;
+    private BoostManager _boostManager;
+    private Animator _animator;
 
-    [SerializeField] private float distance;
-    [SerializeField] private float limitPosY;
+    [SerializeField] float _distance;
+    [SerializeField] float _limitPosY;
     // Start is called before the first frame update
     void Start()
     {
-        boostManager = GameObject.Find("Boost Manager").GetComponent<BoostManager>();
-        animator = GetComponent<Animator>();
+        _gameManager = GameManager.Instance;
+        _boostManager = GameObject.Find("Boost Manager").GetComponent<BoostManager>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.isGameOver && !GameManager.Instance.isGamePause)
+        if (!_gameManager.isGameOver && !_gameManager.isGamePause)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) && transform.position.y < limitPosY)
+            if (Input.GetKeyDown(KeyCode.UpArrow) && transform.position.y < _limitPosY)
             {
                 MoveUp();
             }
-            if (Input.GetKeyDown(KeyCode.DownArrow) && transform.position.y > -limitPosY)
+            if (Input.GetKeyDown(KeyCode.DownArrow) && transform.position.y > -_limitPosY)
             {
                 MoveDown();
             }
         }
-        if (GameManager.Instance.isGamePause)
+        if (_gameManager.isGamePause)
         {
-            animator.speed = 0f;
+            _animator.speed = 0f;
         }
         else
-            animator.speed = 1f;
+            _animator.speed = 1f;
     }
     private void MoveUp()
     {
-        Vector3 upPos = new Vector3(transform.position.x, transform.position.y + distance, transform.position.z);
+        Vector3 upPos = new Vector3(transform.position.x, transform.position.y + _distance, transform.position.z);
 
         transform.position = upPos;
     }
     private void MoveDown()
     {
-        Vector3 downPos = new Vector3(transform.position.x, transform.position.y - distance, transform.position.z);
+        Vector3 downPos = new Vector3(transform.position.x, transform.position.y - _distance, transform.position.z);
 
         transform.position = downPos;
     }
@@ -54,18 +56,19 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Game Over!!!");
 
-            GameManager.Instance.isGameOver = true;
-            if (animator != null)
+            _gameManager.isGameOver = true;
+            if (_animator != null)
             {
-                animator.SetTrigger("DieTrigger");
+                _animator.SetTrigger("DieTrigger");
             }
-            GameManager.Instance.SetGameOverUI();
+            _gameManager.SetGameOverUI();
         }
         if (other.gameObject.CompareTag("Boost"))
         {
-            GameManager.Instance.isGamePause = true;
-            boostManager.showBoostPopup();
-            Destroy(other.gameObject);
+            _gameManager.isGamePause = true;
+            Time.timeScale = 0f;
+            _boostManager.showBoostPopup();
+            other.gameObject.SetActive(false);
         }
     }
 }
