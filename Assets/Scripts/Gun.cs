@@ -18,7 +18,7 @@ public class Gun : MonoBehaviour
         gameManager = GameManager.Instance;
         maxAmmo = ObjectPooler.Instance.amountToPool;
         _currentAmmo = maxAmmo;
-        gameManager.UpdateBulletRemaining(_currentAmmo);
+        gameManager.UpdateAmmoRemaining(_currentAmmo);
         reloadTime = 1.0f;
         SFXManager.Instance.PlaySFX(SFXType.reload);
 
@@ -38,9 +38,6 @@ public class Gun : MonoBehaviour
 
     private void CheckMagazine()
     {
-        if (_isReloading || _currentAmmo >= maxAmmo)
-            return;
-
         if (_currentAmmo == 0 && !_wasZeroAmmo)
         {
             SFXManager.Instance.PlaySFX(SFXType.reload);
@@ -48,6 +45,9 @@ public class Gun : MonoBehaviour
         }
         else if (_currentAmmo > 0)
             _wasZeroAmmo = false;
+
+        if (_isReloading || _currentAmmo >= maxAmmo)
+            return;
 
         if (_currentAmmo < maxAmmo)
             StartCoroutine(ReLoad());
@@ -63,7 +63,7 @@ public class Gun : MonoBehaviour
 
             yield return new WaitForSeconds(reloadTime);
             _currentAmmo++;
-            gameManager.UpdateBulletRemaining(_currentAmmo);
+            gameManager.UpdateAmmoRemaining(_currentAmmo);
         }
 
         _isReloading = false;
@@ -76,7 +76,7 @@ public class Gun : MonoBehaviour
         {
             pooledProjectile.SetActive(true);
             _currentAmmo--;
-            gameManager.UpdateBulletRemaining(_currentAmmo);
+            gameManager.UpdateAmmoRemaining(_currentAmmo);
             pooledProjectile.transform.position = new Vector3(transform.position.x + 1.3f, transform.position.y, transform.position.z);
         }
         SFXManager.Instance.PlaySFX(SFXType.shoot);

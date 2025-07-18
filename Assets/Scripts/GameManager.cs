@@ -51,9 +51,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("Start Game");
     }
 
-    public void UpdateBulletRemaining(int bullet)
+    public void UpdateAmmoRemaining(int ammo)
     {
-        _ammoText.text = bullet.ToString();
+        _ammoText.text = ammo.ToString();
     }
     public void UpdateHighScore()
     {
