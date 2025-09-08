@@ -49,7 +49,6 @@ public class BoostManager : MonoBehaviour
         {
             _totalWeight += boost.weight;
         }
-        _boostSelectedList = new List<BoostEntity>();
         InvokeRepeating("SpawnBoost", startTimeSpawnBoost, spawnRateBoost);
 
     }
@@ -73,7 +72,7 @@ public class BoostManager : MonoBehaviour
     private void setupLogical()
     {
         BoostEntity boostToShow;
-        List<BoostEntity> cloneBoostsList = _boostList;
+        List<BoostEntity> cloneBoostsList = new List<BoostEntity>(_boostList);
         _cloneOfTotalWeight = _totalWeight;
 
         foreach (Text text in _textList)
@@ -81,7 +80,6 @@ public class BoostManager : MonoBehaviour
             boostToShow = getRandomBoost(cloneBoostsList);
             _boostSelectedList.Add(boostToShow);
             text.text = boostToShow.boostDescription.text;
-            Debug.Log(boostToShow.name + " is displaying");
         }
     }
 
@@ -115,27 +113,21 @@ public class BoostManager : MonoBehaviour
         switch (selectedBoost.name)
         {
             case "Boost 1":
-                Debug.Log("Boost 1 is selected");
                 IncreaseBulletAmount(1);
                 break;
             case "Boost 2":
-                Debug.Log("Boost 2 is selected");
                 ReduceReloadTime(0.1f);
                 break;
             case "Boost 3":
-                Debug.Log("Boost 3 is selected");
                 BoostDmg(10);
                 break;
             case "Boost 4":
-                Debug.Log("Boost 4 is selected");
                 IncreaseBulletAmount(2);
                 break;
             case "Boost 5":
-                Debug.Log("Boost 5 is selected");
                 ReduceReloadTime(0.2f);
                 break;
             default:
-                Debug.Log("Boost 6 is selected");
                 BoostDmg(20);
                 break;
         }
@@ -162,16 +154,11 @@ public class BoostManager : MonoBehaviour
     }
     IEnumerator BoostDamage()
     {
-        Debug.Log("Boosting");
-
         bullet.damage = 2;
-        Debug.Log("Current damage: " + bullet.damage);
         yield return new WaitForSeconds(_boostDmgDuration);
 
         bullet.damage = 1;
         _boostDmgIndicator.SetActive(false);
-        Debug.Log("Current damage: " + bullet.damage);
-        Debug.Log("Boosting finish");
     }
 }
 

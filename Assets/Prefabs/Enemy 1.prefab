@@ -387,7 +387,7 @@ MonoBehaviour:
   _bullet: {fileID: -7199293693527480087, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
   _move: {fileID: 0}
   _healthBar: {fileID: 9149707562826114244}
-  _maxHealth: 3
+  _maxHealth: 0
   _currentHealth: 0
   _explosionParticle: {fileID: 4758139293545943008, guid: c7ad2532a6eeb40b59033c75e71fa054, type: 3}
 --- !u!1 &6106246443817649713

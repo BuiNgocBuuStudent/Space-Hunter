@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum MusicType {  combatTheme1, combatTheme2, menuTheme };
 
-public class MusicManager : MonoBehaviour
+public class MusicManager : MonoBehaviour 
 {
     private static MusicManager _instance;
     public static MusicManager Instance => _instance;

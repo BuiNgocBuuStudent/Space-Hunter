@@ -19,7 +19,6 @@ public class DisableOutOfBounds : MonoBehaviour
         {
             if (gameObject.CompareTag("Enemy"))
             {
-                Debug.Log("Game Over!!");
                 _gameManager.isGameOver = true;
                 Time.timeScale = 0f;
                 _gameManager.SetGameOverUI();

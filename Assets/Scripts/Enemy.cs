@@ -23,11 +23,9 @@ public class Enemy : MonoBehaviour
         _maxHealth += _enemyManager.GetGlobalHealBonus();
     }
     // Start is called before the first frame update
-    void Start()
-    {
-    }
     public void Init()
     {
+        _maxHealth = Random.Range(1, 4);
         _gameManager = GameManager.Instance;
         _currentHealth = _maxHealth;
         _healthBar.SetMaxHealth(_maxHealth);

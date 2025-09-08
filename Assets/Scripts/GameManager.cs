@@ -38,18 +38,8 @@ public class GameManager : MonoBehaviour
     {
         _highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
         UpdateHighScore();
-        StartGame();
 
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    public void StartGame()
-    {
-        Debug.Log("Start Game");
-    }
+    } 
 
     public void UpdateAmmoRemaining(int ammo)
     {
