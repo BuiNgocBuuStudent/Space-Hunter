@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: -8769854702659555933}
   - component: {fileID: 7353409964941739342}
   m_Layer: 0
-  m_Name: Enemy 1
+  m_Name: Skull Black
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -387,9 +387,11 @@ MonoBehaviour:
   _bullet: {fileID: -7199293693527480087, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
   _move: {fileID: 0}
   _healthBar: {fileID: 9149707562826114244}
-  _maxHealth: 0
-  _currentHealth: 0
   _explosionParticle: {fileID: 4758139293545943008, guid: c7ad2532a6eeb40b59033c75e71fa054, type: 3}
+  _randomMaxHealth: 4
+  _randomMinHealth: 1
+  _startHealth: 0
+  _currentHealth: 0
 --- !u!1 &6106246443817649713
 GameObject:
   m_ObjectHideFlags: 0

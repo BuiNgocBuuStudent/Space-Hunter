@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: -3654818376704368227}
   - component: {fileID: -6655623139053124560}
   m_Layer: 0
-  m_Name: Enemy 2
+  m_Name: Skull Red
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,9 +360,11 @@ MonoBehaviour:
   _bullet: {fileID: -7199293693527480087, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
   _move: {fileID: 0}
   _healthBar: {fileID: 8533094571881133095}
-  _maxHealth: 0
-  _currentHealth: 0
   _explosionParticle: {fileID: 2088871590894813759, guid: 745208c9d6e104225bd99e1ab894e3bb, type: 3}
+  _randomMaxHealth: 4
+  _randomMinHealth: 1
+  _startHealth: 0
+  _currentHealth: 0
 --- !u!1 &7300213101865424283
 GameObject:
   m_ObjectHideFlags: 0

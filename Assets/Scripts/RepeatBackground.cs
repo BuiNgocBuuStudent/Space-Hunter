@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class RepeatBackground : MonoBehaviour
 {
-    private GameManager gameManager;
+    private GameManager _gameManager;
 
-    public float scrollSpeed;
-    public float speedIncrement;
-    public float timeInterval;
+    private float scrollSpeed;
+    private float speedIncrement;
+    private float timeInterval;
     private float _offset;
     private Material _mat;
 
     private void Start()
     {
-        gameManager = GameManager.Instance;
-        scrollSpeed = 1.0f;
+        _gameManager = GameManager.Instance;
+        scrollSpeed = 0.8f;
         speedIncrement = 1.0f;
         timeInterval = 90.0f;
         _mat = GetComponent<Renderer>().material;
@@ -24,7 +24,7 @@ public class RepeatBackground : MonoBehaviour
 
     void Update()
     {
-        if (!gameManager.isGameOver && !gameManager.isGamePause)
+        if (!_gameManager.isGameOver && !_gameManager.isGamePause)
         {
             _offset += (Time.deltaTime * scrollSpeed) / 10;
             _mat.SetTextureOffset("_MainTex", new Vector2(_offset, 0));
@@ -33,30 +33,10 @@ public class RepeatBackground : MonoBehaviour
     }
     IEnumerator increaseScrollSpeed()
     {
-        while (!gameManager.isGameOver)
+        while (!_gameManager.isGameOver && !_gameManager.isGamePause)
         {
-            while (gameManager.isGamePause)
-            {
-                yield return null;
-            }
-
-            float elapsedTime = 0f;
-            while (elapsedTime < timeInterval)
-            {
-                if (gameManager.isGamePause || GameManager.Instance.isGameOver)
-                {
-                    yield return null;
-                }
-                else
-                {
-                    elapsedTime += Time.deltaTime;
-                }
-                yield return null;
-            }
-            if (!gameManager.isGameOver)
-            {
-                scrollSpeed += speedIncrement;
-            }
+            yield return new WaitForSeconds(timeInterval);
+            scrollSpeed += speedIncrement;
 
         }
 

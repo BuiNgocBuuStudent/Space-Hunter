@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
     {
         _highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
         UpdateHighScore();
-
     } 
 
     public void UpdateAmmoRemaining(int ammo)

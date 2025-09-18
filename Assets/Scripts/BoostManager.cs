@@ -21,9 +21,9 @@ public class BoostManager : MonoBehaviour
     public List<Button> selectBtn;
     private float _totalWeight;
     private float _cloneOfTotalWeight;
+
     [SerializeField] GameObject _boostDmgIndicator;
     private float _boostDmgDuration;
-
     [SerializeField] Boost _boostPrefab;
 
     public float spawnRateBoost;

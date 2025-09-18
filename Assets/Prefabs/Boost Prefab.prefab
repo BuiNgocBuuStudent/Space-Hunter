@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2362546326894501397}
   - component: {fileID: 6998514336921716657}
   m_Layer: 0
-  m_Name: Boost
+  m_Name: Boost Prefab
   m_TagString: Boost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

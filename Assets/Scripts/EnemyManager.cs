@@ -13,10 +13,9 @@ public class EnemyManager : MonoBehaviour
 
     private GameManager _gameManager;
 
-    public static event Action<float, float> OnHeal;
     public float timeInterval;
-    public float healAmount;
-    public float globalHealBonus;
+    public int healAmount;
+    public int globalHealBonus;
     public float speedAmount;
     public float globalSpeedBonus;
     public float spawnRateEnemy;
@@ -30,12 +29,12 @@ public class EnemyManager : MonoBehaviour
         }
         _instance = this;
     }
+
     private void Start()
     {
         _gameManager = GameManager.Instance;
-        ResetGlobalHealBonus();
-        ResetGlobalSpeedBonus();
-        StartCoroutine(IncreaseHealthAndSpeed());
+
+        StartCoroutine(IncreaseHealAndSpeed());
         StartCoroutine(SpawnEnemies());
     }
     IEnumerator SpawnEnemies()
@@ -44,36 +43,31 @@ public class EnemyManager : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnRateEnemy);
             int index = Random.Range(0, _enemyPrefabs.Count);
-            Enemy enemy = ObjectPooler.Instance.Getcomp(_enemyPrefabs[index]);
+            /*
+             *Chấp nhận không sử dụng Object Pooling vì
+             *gặp vấn đề trong logic tăng máu của enemy sau 
+             *một khoảng thời gian
+             */
+            Enemy enemy = Instantiate(_enemyPrefabs[index], this.transform.position, Quaternion.identity);
             enemy.Init();
-            enemy.gameObject.SetActive(true);
         }
     }
-    IEnumerator IncreaseHealthAndSpeed()
+    IEnumerator IncreaseHealAndSpeed()
     {
         while (!_gameManager.isGameOver && !_gameManager.isGamePause)
         {
             yield return new WaitForSeconds(timeInterval);
             globalHealBonus += healAmount;
             globalSpeedBonus += speedAmount;
-            OnHeal?.Invoke(healAmount, speedAmount);
             SFXManager.Instance.PlaySFX(SFXType.warning);
         }
     }
-    public float GetGlobalHealBonus()
+    public int GetGlobalHealBonus()
     {
         return globalHealBonus;
-    }
-    public void ResetGlobalHealBonus()
-    {
-        globalHealBonus = 0f;
     }
     public float GetGlobalSpeedBonus()
     {
         return globalSpeedBonus;
-    }
-    public void ResetGlobalSpeedBonus()
-    {
-        globalHealBonus = 0f;
     }
 }

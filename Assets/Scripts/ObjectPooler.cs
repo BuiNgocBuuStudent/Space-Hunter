@@ -29,7 +29,7 @@ public class ObjectPooler : MonoBehaviour
         AddPooledObject();
     }
 
-    //Pool for Enemy, Boost
+    //Pool for Boost
     public GameObject GetObject(GameObject prefab)
     {
         List<GameObject> listObj = new List<GameObject>();
@@ -56,6 +56,8 @@ public class ObjectPooler : MonoBehaviour
     }
 
     //Pool for Bullet
+    /*Không dùng cách như boost vì bullet cần biết trước số lượng để hiển thị và cập nhập khi số lượng thay đổi
+     */
     public void AddPooledObject()
     {
         pooledObjects.Clear();

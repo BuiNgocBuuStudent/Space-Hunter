@@ -47,18 +47,18 @@ public class MainMenu : MonoBehaviour
             switch (selectedMode)
             {
                 case GameMode.easy:
-                    setGameMode(spawnRateEnemy: 2.0f, spawnRateBoost: 30.0f, startTimeSpawnBoost: 10.0f, healAmount: 1.0f, speedAmount: 1.5f, timeInterval: 100.0f);
+                    setGameMode(spawnRateEnemy: 2.0f, spawnRateBoost: 30.0f, startTimeSpawnBoost: 10.0f, healAmount: 1, speedAmount: 1.5f, timeInterval: 100.0f);
                     break;
                 case GameMode.normal:
-                    setGameMode(spawnRateEnemy: 1.8f, spawnRateBoost: 31.0f, startTimeSpawnBoost: 10.0f, healAmount: 1.0f, speedAmount: 1.5f, timeInterval: 90.0f);
+                    setGameMode(spawnRateEnemy: 1.8f, spawnRateBoost: 31.0f, startTimeSpawnBoost: 10.0f, healAmount: 1, speedAmount: 1.5f, timeInterval: 90.0f);
                     break;
                 case GameMode.hard:
-                    setGameMode(spawnRateEnemy: 1.6f, spawnRateBoost: 32.0f, startTimeSpawnBoost: 10.0f, healAmount: 1.0f, speedAmount: 1.3f, timeInterval: 80.0f);
+                    setGameMode(spawnRateEnemy: 1.6f, spawnRateBoost: 32.0f, startTimeSpawnBoost: 10.0f, healAmount: 1, speedAmount: 1.3f, timeInterval: 80.0f);
                     break;
             }
         }
     }
-    private void setGameMode(float spawnRateEnemy, float spawnRateBoost, float startTimeSpawnBoost, float healAmount, float speedAmount, float timeInterval)
+    private void setGameMode(float spawnRateEnemy, float spawnRateBoost, float startTimeSpawnBoost, int healAmount, float speedAmount, float timeInterval)
     {
         EnemyManager.Instance.spawnRateEnemy = spawnRateEnemy;
         BoostManager.Instance.spawnRateBoost = spawnRateBoost;

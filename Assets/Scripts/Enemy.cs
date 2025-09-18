@@ -4,57 +4,47 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private EnemyManager _enemyManager; 
+    private EnemyManager _enemyManager;
     private GameManager _gameManager;
+    [Header("-------Reference Object-----")]
     [SerializeField] List<Vector3> _spawnPoints;
-
     [SerializeField] Bullet _bullet;
     [SerializeField] Move _move;
     [SerializeField] HealthBar _healthBar;
-    [SerializeField] float _maxHealth;
-    [SerializeField] float _currentHealth;
-
     [SerializeField] ParticleSystem _explosionParticle;
+
+    [Header("-------Normal Type------")]
+    [SerializeField] int _randomMaxHealth;
+    [SerializeField] int _randomMinHealth;
+    [SerializeField] int _startHealth;
+    [SerializeField] int _currentHealth;
+
     private void Awake()
     {
         _enemyManager = EnemyManager.Instance;
         _move = GetComponent<Move>();
-        _move.speed += _enemyManager.GetGlobalSpeedBonus();
-        _maxHealth += _enemyManager.GetGlobalHealBonus();
+        _gameManager = GameManager.Instance;
     }
-    // Start is called before the first frame update
     public void Init()
     {
-        _maxHealth = Random.Range(1, 4);
-        _gameManager = GameManager.Instance;
-        _currentHealth = _maxHealth;
-        _healthBar.SetMaxHealth(_maxHealth);
+        _randomMinHealth += _enemyManager.GetGlobalHealBonus();
+        _randomMaxHealth += _enemyManager.GetGlobalHealBonus();
+        _move.speed += _enemyManager.GetGlobalSpeedBonus();
+
+        _startHealth = Random.Range(_randomMinHealth, _randomMaxHealth);
+        _currentHealth = _startHealth;
+        _healthBar.SetMaxHealth(_startHealth);
+
         _spawnPoints = _gameManager.spawnPoints;
         transform.position = RandomPos();
     }
-    private void OnEnable()
-    {
-        EnemyManager.OnHeal += IncHealthAndSpeed;
-    }
-    private void OnDisable()
-    {
-        EnemyManager.OnHeal -= IncHealthAndSpeed;
-    }
-
-    private void IncHealthAndSpeed(float healAmount, float speedAmount)
-    {
-        _maxHealth += healAmount;
-        _healthBar.SetMaxHealth(_maxHealth);
-        _move.speed += speedAmount;
-    }
-
+   
     private Vector3 RandomPos()
     {
         int index = Random.Range(0, _spawnPoints.Count);
         return _spawnPoints[index];
 
     }
-    // Update is called once per frame
     void Update()
     {
         if (_currentHealth <= 0)
@@ -62,7 +52,7 @@ public class Enemy : MonoBehaviour
             _gameManager.UpdateScore();
             SFXManager.Instance.PlaySFX(SFXType.enemyDie);
             Instantiate(_explosionParticle, transform.position, _explosionParticle.transform.rotation);
-            gameObject.SetActive(false);
+            Destroy(this.gameObject);
         }
     }
     public void IsAttacked(int damage)
