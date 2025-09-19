@@ -398,10 +398,9 @@ GameObject:
   - component: {fileID: 1525201597090014097}
   - component: {fileID: 4761887178164252973}
   - component: {fileID: 8343737466191526087}
-  - component: {fileID: -1364861915700690707}
-  - component: {fileID: 9169604756950900759}
   - component: {fileID: -5889504488080633041}
-  m_Layer: 0
+  - component: {fileID: -2774351293717606101}
+  m_Layer: 6
   m_Name: Skull Silver
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -496,31 +495,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8609604, y: 1.1594056, z: 1}
   m_Center: {x: 0.06951981, y: -0.07970238, z: 0}
---- !u!114 &-1364861915700690707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6467796485199524224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d644b6ca2bf9ad4783c6575628c9d8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 7
---- !u!114 &9169604756950900759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6467796485199524224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6672fe01a5e565c418349b28a7a48efb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-5889504488080633041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,13 +509,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnPoints: []
   _bullet: {fileID: -7199293693527480087, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
-  _move: {fileID: 0}
   _healthBar: {fileID: 7426167774966978499}
   _explosionParticle: {fileID: 7535607469619513247, guid: ac10190cf200c4f7e881ca8e41d3d760, type: 3}
-  _randomMaxHealth: 3
   _randomMinHealth: 1
-  _startHealth: 0
+  _randomMaxHealth: 4
   _currentHealth: 0
+  _startHealth: 0
+  _moveSpeed: 300
+  _lifeTime: 10
+--- !u!54 &-2774351293717606101
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6467796485199524224}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &895350687244545803
 PrefabInstance:
   m_ObjectHideFlags: 0

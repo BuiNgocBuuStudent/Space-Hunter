@@ -221,10 +221,9 @@ GameObject:
   - component: {fileID: 7016464863258643415}
   - component: {fileID: 7363531397882153998}
   - component: {fileID: 8438250346162374332}
-  - component: {fileID: 413976988862787032}
-  - component: {fileID: -3654818376704368227}
   - component: {fileID: -6655623139053124560}
-  m_Layer: 0
+  - component: {fileID: -1890632173635135800}
+  m_Layer: 6
   m_Name: Skull Red
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -319,31 +318,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8431622, y: 1, z: 1}
   m_Center: {x: 0.078418925, y: 0, z: 0}
---- !u!114 &413976988862787032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6154550348750401381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d644b6ca2bf9ad4783c6575628c9d8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
---- !u!114 &-3654818376704368227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6154550348750401381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6672fe01a5e565c418349b28a7a48efb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-6655623139053124560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,13 +332,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnPoints: []
   _bullet: {fileID: -7199293693527480087, guid: f2d7fc4d943bbd24a9075757ee4c7c5a, type: 3}
-  _move: {fileID: 0}
   _healthBar: {fileID: 8533094571881133095}
   _explosionParticle: {fileID: 2088871590894813759, guid: 745208c9d6e104225bd99e1ab894e3bb, type: 3}
-  _randomMaxHealth: 4
   _randomMinHealth: 1
-  _startHealth: 0
+  _randomMaxHealth: 4
   _currentHealth: 0
+  _startHealth: 0
+  _moveSpeed: 260
+  _lifeTime: 10
+--- !u!54 &-1890632173635135800
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6154550348750401381}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7300213101865424283
 GameObject:
   m_ObjectHideFlags: 0
