@@ -5,18 +5,15 @@ public class RepeatBackground : MonoBehaviour
 {
     private GameManager _gameManager;
 
-    private float scrollSpeed;
-    private float speedIncrement;
-    private float timeInterval;
+    [SerializeField] float _scrollSpeed;
+    [SerializeField] float _speedIncrement;
+    [SerializeField] float _timeInterval;
     private float _offset;
     private Material _mat;
 
     private void Start()
     {
         _gameManager = GameManager.Instance;
-        scrollSpeed = 0.8f;
-        speedIncrement = 1.0f;
-        timeInterval = 90.0f;
         _mat = GetComponent<Renderer>().material;
         StartCoroutine(increaseScrollSpeed());
     }
@@ -26,18 +23,16 @@ public class RepeatBackground : MonoBehaviour
     {
         if (!_gameManager.isGameOver && !_gameManager.isGamePause)
         {
-            _offset += (Time.deltaTime * scrollSpeed) / 10;
+            _offset += (Time.deltaTime * _scrollSpeed) / 10;
             _mat.SetTextureOffset("_MainTex", new Vector2(_offset, 0));
         }
-
     }
     IEnumerator increaseScrollSpeed()
     {
         while (!_gameManager.isGameOver && !_gameManager.isGamePause)
         {
-            yield return new WaitForSeconds(timeInterval);
-            scrollSpeed += speedIncrement;
-
+            yield return new WaitForSeconds(_timeInterval);
+            _scrollSpeed += _speedIncrement;
         }
 
     }

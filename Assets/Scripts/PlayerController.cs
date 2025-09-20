@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-
             _gameManager.isGameOver = true;
             if (_animator != null)
             {

@@ -4386,9 +4386,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90df0450e157b064c9a766885e44db6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0
-  speedIncrement: 0
-  timeInterval: 0
+  _scrollSpeed: 0.8
+  _speedIncrement: 1
+  _timeInterval: 90
 --- !u!1001 &1493352975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6232,6 +6232,10 @@ PrefabInstance:
     - target: {fileID: 3710060014921662335, guid: c475b56483ffafe478945c29bdd3bac2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265400680528671454, guid: c475b56483ffafe478945c29bdd3bac2, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7559435519263023655, guid: c475b56483ffafe478945c29bdd3bac2, type: 3}
       propertyPath: m_IsTrigger

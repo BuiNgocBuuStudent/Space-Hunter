@@ -14,13 +14,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] ParticleSystem _explosionParticle;
 
     [SerializeField] int _randomMinHealth, _randomMaxHealth, _currentHealth, _startHealth;
-    [SerializeField] float _moveSpeed, _lifeTime;
+    [SerializeField] float _moveSpeed;
     private void Awake()
     {
         _enemyManager = EnemyManager.Instance;
         _rb = this.GetComponent<Rigidbody>();
         _gameManager = GameManager.Instance;
-        StartCoroutine(CheckLifeTime());
     }
     public void Init()
     {
@@ -45,11 +44,12 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         CheckEnemyDied();
-        _lifeTime -= Time.deltaTime;
     }
     private void FixedUpdate()
     {
-        _rb.velocity = this.transform.right * -_moveSpeed * Time.deltaTime;
+        _rb.velocity = this.transform.right * -_moveSpeed;
+        if (_gameManager.isGameOver || _gameManager.isGamePause)
+            _rb.velocity = Vector2.zero;
     }
     private void CheckEnemyDied()
     {
@@ -65,18 +65,6 @@ public class Enemy : MonoBehaviour
     {
         _currentHealth -= damage;
         _healthBar.SetHeath(_currentHealth);
-    }
-    IEnumerator CheckLifeTime()
-    {
-        while (!_gameManager.isGameOver && !_gameManager.isGamePause)
-        {
-            yield return new WaitForSeconds(_lifeTime);
-            _gameManager.isGameOver = true;
-            Time.timeScale = 0f;
-            _gameManager.SetGameOverUI();
-            Destroy(gameObject);
-        }
-
     }
     private void OnTriggerEnter(Collider other)
     {
